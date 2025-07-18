@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|jsx|ts|tsx|json|md|css|scss|html)$' || true)
+
+if [ -z "$files" ]; then
+  exit 0
+fi
+
+existing_files=""
+for file in $files; do
+  if [ -f "$file" ]; then
+    existing_files="$existing_files $file"
+  fi
+done
+
+if [ -z "$existing_files" ]; then
+  exit 0
+fi
+
+echo "$existing_files" | xargs npx --no-install oxlint --fix
+echo "$existing_files" | xargs npx --no-install prettier --write
+echo "$existing_files" | xargs git add

@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "jsx": "react-jsx",
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "typeRoots": ["node_modules/@types"],
+        "allowJs": true,
+        "strictNullChecks": true,
+        "noImplicitAny": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "preserveConstEnums": true,
+        "removeComments": false,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "rootDir": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "outDir": "lib"
+    },
+    "compileOnSave": false,
+    "include": ["./src", "./types"]
+}

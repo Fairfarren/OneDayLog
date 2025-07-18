@@ -1,0 +1,14 @@
+{
+    "configVersion": 2,
+    "packages": [
+        {
+            "name": "myTest",
+            "rootUri": "../",
+            "packageUri": "lib/",
+            "languageVersion": "3.2"
+        }
+    ],
+    "generated": "2024-01-18T17:21:52.837912Z",
+    "generator": "pub",
+    "generatorVersion": "3.2.5"
+}
