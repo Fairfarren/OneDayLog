@@ -1,6 +1,5 @@
-import { useDidShow } from '@tarojs/taro'
-import { useEffect } from 'react'
 import { RES_CODE } from '@/apis/const'
+import QueryProvider from '@/components/globalConfig/queryProvider'
 import { clearUserInfo, toSetCode } from '@/store/user'
 import './app.scss'
 import {
@@ -8,8 +7,8 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import QueryProvider from '@/components/globalConfig/queryProvider'
-import { showLoading } from '@/utils'
+import { useDidShow } from '@tarojs/taro'
+import { useEffect } from 'react'
 
 if (typeof globalThis.AbortController === 'undefined') {
     // 简单的空实现，避免报错
@@ -37,9 +36,9 @@ const queryClient = new QueryClient({
 })
 
 function App(props) {
-    useEffect(() => {
-        showLoading({ title: '正在链接服务器...' })
-    }, [])
+    // useEffect(() => {
+    //     showLoading({ title: '正在链接服务器...' })
+    // }, [])
 
     useEffect(() => {
         console.log('===首次进入页面===')
