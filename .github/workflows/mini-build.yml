@@ -33,12 +33,12 @@ jobs:
                     cd taro-miniApp-tools
                     mkdir apps
                     cd apps
-                    git clone git@github.com:Fairfarren/bear-printer.git
+                    git clone git@github.com:Fairfarren/ReTime.git
                     cd ../
                     bun install
                     cd packages/taro-components
                     bun run build
-                    cd ../../apps/bear-printer
+                    cd ../../apps/ReTime
                     bun run test:weapp
 
             -   name: Upload
@@ -46,24 +46,6 @@ jobs:
                 with:
                     action_type: upload
                     version: 1.0.0
-                    project_path: ./taro-miniApp-tools/apps/bear-printer
+                    project_path: ./taro-miniApp-tools/apps/ReTime
                 env:
                     PRIVATE_KEY: ${{ secrets.MINIBUILD }}
-
-            -   name: Push
-                run: |
-                    cd taro-miniApp-tools/apps/bear-printer
-                    mkdir gitee
-                    cd gitee
-                    git clone git@gitee.com:fairfarren/bear-print.git
-                    cd ../
-                    cp project.tt.json ./gitee/bear-print
-                    cp project.private.config.json ./gitee/bear-print
-                    cp project.config.json ./gitee/bear-print
-                    cp -r dist ./gitee/bear-print
-                    cd ./gitee/bear-print
-                    git config user.email "${{ vars.MY_EMAIL }}"
-                    git config user.name "${{ vars.GITEE_NAME }}"
-                    git add -A
-                    git commit -m ':rocket:'
-                    git push -f
