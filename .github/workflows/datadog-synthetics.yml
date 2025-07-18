@@ -1,0 +1,51 @@
+name: NodeJS with Webpack
+
+on:
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
+
+jobs:
+    build:
+        runs-on: ubuntu-22.04
+        strategy:
+            matrix:
+                node-version: [ 20 ]
+        steps:
+            -   uses: actions/checkout@v4
+            -   uses: oven-sh/setup-bun@v2
+
+            -   name: set key
+                run: |
+                    SSHPATH="$HOME/.ssh"
+                    rm -rf "$SSHPATH"
+                    mkdir -p "$SSHPATH"
+                    echo "${{ secrets.GITEE_ACTION }}" > "$SSHPATH/id_rsa"
+                    chmod 600 "$SSHPATH/id_rsa"
+                    ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+                    sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
+
+            -   name: clone fetch
+                run: |
+                    rm -rf ./*
+                    git clone git@github.com:Fairfarren/taro-miniApp-tools.git
+                    cd taro-miniApp-tools
+                    mkdir apps
+                    cd apps
+                    git clone git@github.com:Fairfarren/ReTime.git
+                    cd ../
+                    bun install
+                    cd packages/taro-components
+                    bun run build
+                    cd ../../apps/ReTime
+                    bun run test:weapp
+
+            -   name: Upload
+                uses: crazyurus/miniprogram-action@1.0.0
+                with:
+                    action_type: upload
+                    version: 1.0.0
+                    project_path: ./taro-miniApp-tools/apps/ReTime
+                env:
+                    PRIVATE_KEY: ${{ secrets.MINIBUILD }}
