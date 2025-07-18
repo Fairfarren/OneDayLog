@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  taro-pnpm:
+    container_name: taro-pnpm
+    image: node:20.16.0
+    volumes:
+      - .:/var/www
+    tty: true
+    stdin_open: true

@@ -1,0 +1,15 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+env.json
+.idea
+app.dart
+/lib/
+yarn.lock
+.swc
+.fleet
+.pnpm-store
+gitlog.log
