@@ -12,7 +12,7 @@ const Index = () => {
                     className={classnames(
                         'text-base-content',
                         'text-2xl',
-                        'font-bole',
+                        'font-bold',
                     )}
                 >
                     <Text>一日所记</Text>
