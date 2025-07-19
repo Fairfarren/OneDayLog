@@ -1,8 +1,8 @@
-import Taro from '@tarojs/taro'
-import qs from 'qs'
 import { RES_CODE } from '@/apis/const'
 import { useStoToken } from '@/store/user'
 import { showToast } from '@/utils'
+import { request } from '@tarojs/taro'
+import qs from 'qs'
 
 type METHOD = 'POST' | 'GET' | 'DELETE' | 'PUT'
 
@@ -26,7 +26,7 @@ function api<T>(params: {
                 ...params,
                 url,
             }
-            Taro.request(options)
+            request(options)
                 .then((res) => {
                     if (process.env.NODE_ENV !== 'development') {
                         console.log(`===接口返回,url:${options.url}===`)
@@ -60,9 +60,6 @@ function api<T>(params: {
                         icon: 'error',
                         duration: 1500,
                     })
-                    // console.log('===网络错误===')
-                    // console.log(err)
-                    // console.log('===end网络错误===')
                     reject(err)
                 })
         })()

@@ -1,8 +1,8 @@
+import { STORAGE_KEY } from '@/apis/const'
+import { withStoreConfig } from '@/utils'
 import Taro from '@tarojs/taro'
 import { create } from 'zustand'
 import { combine, createJSONStorage, persist } from 'zustand/middleware'
-import { STORAGE_KEY } from '@/apis/const'
-import { withStoreConfig } from '@/utils'
 
 export class ClassUserInfo {
     avatar = ''
