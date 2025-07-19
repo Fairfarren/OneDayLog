@@ -14,7 +14,7 @@ jobs:
                 node-version: [ 20 ]
         steps:
             -   uses: actions/checkout@v4
-#            -   uses: oven-sh/setup-bun@v2
+            -   uses: oven-sh/setup-bun@v2
 
             -   name: set key
                 run: |
@@ -35,11 +35,11 @@ jobs:
                     cd apps
                     git clone git@github.com:Fairfarren/ReTime.git
                     cd ../
-                    npm install
+                    bun install
                     cd packages/taro-components
-                    npm run build
+                    bun run build
                     cd ../../apps/ReTime
-                    npm run test:weapp
+                    bun run test:weapp
 
             -   name: Upload
                 uses: crazyurus/miniprogram-action@1.0.0
