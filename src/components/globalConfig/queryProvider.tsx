@@ -1,3 +1,4 @@
+import { useTime } from '@/store/time'
 import { toSetCode, useStoToken } from '@/store/user'
 import { type ReactNode, useEffect } from 'react'
 
@@ -19,6 +20,10 @@ function QueryProvider(props: { children: ReactNode }) {
         return () => {
             unUseStoToken()
         }
+    }, [])
+
+    useEffect(() => {
+        useTime.getState().reset()
     }, [])
 
     return props.children

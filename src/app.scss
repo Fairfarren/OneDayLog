@@ -2,6 +2,31 @@
 @use 'tailwindcss/components' as *;
 @use 'tailwindcss/utilities' as *;
 
+.bg {
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 13px,
+        hsl(var(--b2)) 13px,
+        hsl(var(--b2)) 15px
+    );
+}
+
 page {
     font-family: alimama;
+    //@extend .bg;
+}
+
+.container {
+    @apply px-3 py-2;
+}
+
+.box {
+    @apply px-2 py-3 bg-base-100 rounded-lg shadow-lg mt-3;
+}
+
+button {
+    &::after {
+        border: none;
+    }
 }

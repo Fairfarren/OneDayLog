@@ -1,3 +1,4 @@
+import iconLoading from '@/assets/icon/loading.svg'
 import PATH_URL from '@/const/path'
 import { Share as AShare, type ShareProps } from '@taro-react-tools/components'
 import { View } from '@tarojs/components'
@@ -28,9 +29,10 @@ export const Share = memo((props: ShareProps) => {
         <>
             <AShare
                 {...props}
-                className={classnames('bg-base-100', props.className)}
+                className={classnames(props.className)}
                 promise={buttonShareBefore}
                 shareOption={{ ...shareOption, ...props.shareOption }}
+                loadingImg={iconLoading}
             >
                 {props.children}
             </AShare>

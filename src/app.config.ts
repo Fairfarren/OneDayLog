@@ -8,12 +8,7 @@ Object.values(PATH_URL).forEach((url) => {
 
 export default defineAppConfig({
     pages,
-    window: {
-        backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: 'WeChat',
-        navigationBarTextStyle: 'black',
-    },
+    window: {},
     requiredPrivateInfos: [],
     permission: {},
 })
