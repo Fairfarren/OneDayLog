@@ -20,6 +20,10 @@ const Index = () => {
                 </Button>
                 <Button className="btn btn-active btn-accent">Accent</Button>
                 <Button className="btn btn-active btn-ghost">Ghost</Button>
+                <Button className="btn btn-active btn-error">btn-error</Button>
+                <Button className="btn btn-active btn-warning">
+                    btn-warning
+                </Button>
                 <Button className="btn btn-active btn-link">Link</Button>
             </View>
         </Share>

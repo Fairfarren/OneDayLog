@@ -10,6 +10,52 @@ module.exports = {
         preflight: false,
     },
     plugins: [require('daisyui')],
+    daisyui: {
+        themes: [
+            {
+                light: {
+                    primary: '#0fc19b',
+
+                    secondary: '#db7f6b',
+
+                    accent: '#87c7f2',
+
+                    neutral: '#2d2037',
+
+                    'base-100': '#f4f2f7',
+
+                    info: '#4170c8',
+
+                    success: '#20d56b',
+
+                    warning: '#dea30d',
+
+                    error: '#f44867',
+                },
+            },
+            {
+                dark: {
+                    primary: '#11f79b',
+
+                    secondary: '#ea6462',
+
+                    accent: '#9494e0',
+
+                    neutral: '#25213b',
+
+                    'base-100': '#394047',
+
+                    info: '#5dabee',
+
+                    success: '#6febb2',
+
+                    warning: '#e49f0c',
+
+                    error: '#e9447b',
+                },
+            },
+        ],
+    },
     theme: {
         container: {
             screens: {
