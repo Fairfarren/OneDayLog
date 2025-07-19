@@ -1,11 +1,17 @@
+import DiyHeader from '@/components/diyHeader'
 import { Share } from '@/components/share'
-import { Button, View } from '@tarojs/components'
+import { Button, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
 
 const Index = () => {
     return (
         <Share>
-            <View className={classnames('w-screen', 'h-screen')}>
+            <DiyHeader>
+                <View className={classnames('text-base-content')}>
+                    <Text>记时薄</Text>
+                </View>
+            </DiyHeader>
+            <View>
                 <Button className="btn btn-active">Default</Button>
                 <Button className="btn btn-active btn-neutral">Neutral</Button>
                 <Button className="btn btn-active btn-primary">Primary</Button>

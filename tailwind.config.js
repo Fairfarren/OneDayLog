@@ -10,4 +10,11 @@ module.exports = {
         preflight: false,
     },
     plugins: [require('daisyui')],
+    theme: {
+        container: {
+            screens: {
+                sm: '100%',
+            },
+        },
+    },
 }
