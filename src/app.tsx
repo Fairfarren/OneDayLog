@@ -1,4 +1,3 @@
-import { RES_CODE } from '@/apis/const'
 import QueryProvider from '@/components/globalConfig/queryProvider'
 import { clearUserInfo, toSetCode } from '@/store/user'
 import './app.scss'
@@ -22,7 +21,7 @@ if (typeof globalThis.AbortController === 'undefined') {
 const queryClient = new QueryClient({
     queryCache: new QueryCache({
         onError: (err) => {
-            if (err.code === RES_CODE.EXPIRE) {
+            if (err.code === 'RES_CODE.EXPIRE') {
                 clearUserInfo()
                 toSetCode()
             }
@@ -36,10 +35,6 @@ const queryClient = new QueryClient({
 })
 
 function App(props) {
-    // useEffect(() => {
-    //     showLoading({ title: '正在链接服务器...' })
-    // }, [])
-
     useEffect(() => {
         console.log('===首次进入页面===')
         wx.loadFontFace({
