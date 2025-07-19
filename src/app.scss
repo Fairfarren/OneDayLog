@@ -84,6 +84,35 @@ page {
     padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
 }
 
+.picker-mask {
+    max-width: auto;
+    background: linear-gradient(
+        0deg,
+        hsl(var(--b2) / 0.8) 0%,
+        hsl(var(--b2) / 0) 33%,
+        hsl(var(--b2) / 0) 66%,
+        hsl(var(--b2) / 0.8) 100%
+    );
+    background-size: 100% 100% !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 9;
+}
+
+.indHeight {
+    height: 306px;
+
+    @apply bg-accent bg-opacity-10;
+
+    &::before {
+        content: none;
+    }
+
+    &::after {
+        content: none;
+    }
+}
+
 button {
     &::after {
         border: none;
