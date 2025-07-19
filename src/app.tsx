@@ -6,7 +6,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import { useDidShow } from '@tarojs/taro'
+import { loadFontFace, useDidShow } from '@tarojs/taro'
 import { useEffect } from 'react'
 
 if (typeof globalThis.AbortController === 'undefined') {
@@ -37,23 +37,11 @@ const queryClient = new QueryClient({
 function App(props) {
     useEffect(() => {
         console.log('===首次进入页面===')
-        wx.loadFontFace({
+        loadFontFace({
             global: true,
-            family: 'JDZhengHT-Bold',
+            family: 'alimama',
             scopes: ['webview', 'native'],
-            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/9dddc333df972a35ae615b29d052b127.ttf")',
-        })
-        wx.loadFontFace({
-            global: true,
-            family: 'JDZhengHT-Light',
-            scopes: ['webview', 'native'],
-            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/79beeb3aed0b0c2f924c926f752ee17b.ttf")',
-        })
-        wx.loadFontFace({
-            global: true,
-            family: 'JDZhengHT-Regular',
-            scopes: ['webview', 'native'],
-            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/0bea5bb8878eea4a3f92cbc3435a8f91.ttf")',
+            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/3b91e1b64cb787e106fb8fb1b58ed045.ttf")',
         })
     }, [])
 

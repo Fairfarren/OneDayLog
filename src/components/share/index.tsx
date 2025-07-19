@@ -28,6 +28,7 @@ export const Share = memo((props: ShareProps) => {
         <>
             <AShare
                 {...props}
+                className={classnames('bg-base-100', props.className)}
                 promise={buttonShareBefore}
                 shareOption={{ ...shareOption, ...props.shareOption }}
             >
