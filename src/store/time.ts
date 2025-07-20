@@ -3,11 +3,11 @@ import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 
 class TimeState {
-    year = ''
-    month = ''
-    day = ''
+    year = 0
+    month = 0
+    day = 0
     choiceDay = ''
-    days: string[] = []
+    days: number[] = []
     firstDayOfMonth: number = 0
 }
 
@@ -18,24 +18,21 @@ export const useTime = create(
         },
         (set) => {
             return {
-                getDoubleDay() {
-                    return this.day === this.choiceDay ? this.day : false
-                },
                 update(data: Partial<TimeState>) {
                     set(data)
                 },
                 reset() {
                     const days = dayjs()
-                    const toMonth = String(days.month() + 1).padStart(2, '0')
-                    const toDay = `${toMonth}-${String(days.date()).padStart(2, '0')}`
+                    const toMonth = days.month() + 1
+                    const toDay = days.date()
                     set({
-                        year: String(days.year()),
+                        year: days.year(),
                         month: toMonth,
                         day: toDay,
-                        choiceDay: toDay,
+                        choiceDay: `${toMonth}-${toDay}`,
                         days: Array(days.daysInMonth())
                             .fill(null)
-                            .map((_, i) => `${i + 1}`.padStart(2, '0')),
+                            .map((_, i) => i + 1),
                         firstDayOfMonth: days.startOf('month').day(),
                     })
                 },

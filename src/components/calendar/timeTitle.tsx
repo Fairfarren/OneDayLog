@@ -8,13 +8,13 @@ const list1 = Array(80)
     .fill(null)
     .map((_, i) => ({
         value: 2020 + i,
-        label: 2020 + i,
+        label: 2020 + i + '年',
     }))
 const list2 = Array(12)
     .fill(null)
     .map((_, i) => ({
         value: i + 1,
-        label: i + 1,
+        label: i + 1 + '月',
     }))
 
 const listData = [list1, list2]
@@ -33,7 +33,7 @@ function TimeTitle() {
                 )}
                 onClick={() => setVisible(true)}
             >
-                {time.year} - {time.month}
+                {time.year} - {String(time.month).padStart(2, '0')}
             </View>
 
             <Overlay visible={visible} lockScroll>
@@ -71,6 +71,7 @@ function TimeTitle() {
                         <PickerView
                             options={listData}
                             className={classnames('!w-full', '!h-full')}
+                            defaultValue={[time.year, time.month]}
                             onChange={(e) => {
                                 console.log(e)
                             }}
