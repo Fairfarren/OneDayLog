@@ -120,7 +120,7 @@ button {
 
 .nut-pickerview-roller {
     .nut-pickerview-roller-item {
-        @apply text-base-content text-lg !important;
+        @apply text-base-content text-lg flex items-center justify-center !important;
     }
 
     .nut-pickerview-roller-item-active {
