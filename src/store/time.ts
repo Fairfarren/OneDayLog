@@ -2,6 +2,8 @@ import dayjs from 'dayjs'
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 
+const _days = dayjs()
+
 class TimeState {
     year = 0
     month = 0
@@ -9,6 +11,7 @@ class TimeState {
     choiceDay = ''
     days: number[] = []
     firstDayOfMonth: number = 0
+    today = `${_days.year()}-${_days.month() + 1}-${_days.date()}`
 }
 
 export const useTime = create(
@@ -23,9 +26,10 @@ export const useTime = create(
                 },
                 reset(data?: string) {
                     const days = dayjs(data)
+                    const toYear = days.year()
                     const toMonth = days.month() + 1
                     set({
-                        year: days.year(),
+                        year: toYear,
                         month: toMonth,
                         days: Array(days.daysInMonth())
                             .fill(null)
@@ -36,7 +40,7 @@ export const useTime = create(
                         const toDay = days.date()
                         set({
                             day: toDay,
-                            choiceDay: `${toMonth}-${toDay}`,
+                            choiceDay: `${toYear}-${toMonth}-${toDay}`,
                         })
                     }
                 },

@@ -40,6 +40,7 @@ function TimeTitle() {
                     'items-center',
                     'justify-center',
                     'gap-1',
+                    'relative',
                 )}
                 onClick={() => setVisible(true)}
             >
@@ -49,6 +50,18 @@ function TimeTitle() {
                 <Text
                     className={classnames('myicon', 'myicon-unfold', 'text-xl')}
                 ></Text>
+
+                <Text
+                    className={classnames(
+                        'absolute',
+                        'right-0',
+                        'top-1/2',
+                        '-translate-y-1/2',
+                        'text-lg',
+                    )}
+                >
+                    今
+                </Text>
             </View>
 
             <Overlay visible={visible} lockScroll>
