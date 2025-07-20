@@ -1,5 +1,6 @@
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
+import { memo } from 'react'
 
 const titleList = ['日', '一', '二', '三', '四', '五', '六']
 
@@ -24,4 +25,4 @@ function Week() {
     )
 }
 
-export default Week
+export default memo(Week)

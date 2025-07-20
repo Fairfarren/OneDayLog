@@ -2,7 +2,7 @@ import { useTime } from '@/store/time'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 function DaysCom(props: { month: number }) {
     const time = useTime()
@@ -63,4 +63,4 @@ function DaysCom(props: { month: number }) {
     )
 }
 
-export default DaysCom
+export default memo(DaysCom)

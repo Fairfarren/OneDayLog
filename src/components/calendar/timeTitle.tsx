@@ -3,7 +3,7 @@ import { useTime } from '@/store/time'
 import { Overlay, PickerView } from '@nutui/nutui-react-taro'
 import { Button, Image, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 const list1 = Array(80)
     .fill(null)
@@ -24,6 +24,7 @@ function TimeTitle() {
     const time = useTime()
     const [visible, setVisible] = useState(false)
     const [tmpValue, setTempValue] = useState<number[]>([])
+    console.log('qwe')
 
     function updateTime() {
         time.reset(`${tmpValue[0]}-${tmpValue[1]}`)
@@ -145,4 +146,4 @@ function TimeTitle() {
     )
 }
 
-export default TimeTitle
+export default memo(TimeTitle)
