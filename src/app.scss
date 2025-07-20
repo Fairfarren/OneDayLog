@@ -85,7 +85,6 @@ page {
 }
 
 .picker-mask {
-    max-width: auto;
     background: linear-gradient(
         0deg,
         hsl(var(--b2) / 0.8) 0%,
@@ -117,4 +116,18 @@ button {
     &::after {
         border: none;
     }
+}
+
+.nut-pickerview-roller {
+    .nut-pickerview-roller-item {
+        @apply text-base-content text-lg !important;
+    }
+
+    .nut-pickerview-roller-item-active {
+        @apply text-accent font-bold !important;
+    }
+}
+
+.nut-pickerview-indicator {
+    @apply bg-accent bg-opacity-10 !important;
 }
