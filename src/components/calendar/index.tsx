@@ -30,25 +30,27 @@ function Calendar() {
             duration: 0,
         }))
         setTimeout(() => {
-            if (e.detail.current < 1) {
-                month = month - 1
-            } else if (e.detail.current > 1) {
-                month = month + 1
-            }
-            if (month < 1) {
-                month = 12
-                year = year - 1
-            } else if (month > 12) {
-                month = 1
-                year = year + 1
-            }
-            time.update({
-                year,
-                month,
-            })
             setConfig({
                 duration: 500,
                 current: 1,
+            })
+            setTimeout(() => {
+                if (e.detail.current < 1) {
+                    month = month - 1
+                } else if (e.detail.current > 1) {
+                    month = month + 1
+                }
+                if (month < 1) {
+                    month = 12
+                    year = year - 1
+                } else if (month > 12) {
+                    month = 1
+                    year = year + 1
+                }
+                time.update({
+                    year,
+                    month,
+                })
             })
         }, 0)
     }
