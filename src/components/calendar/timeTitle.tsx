@@ -1,11 +1,23 @@
 import { useTime } from '@/store/time'
-import { Popup } from '@nutui/nutui-react-taro'
-import { PickerView, PickerViewColumn, View } from '@tarojs/components'
+import { Overlay, PickerView } from '@nutui/nutui-react-taro'
+import { Button, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { useState } from 'react'
 
-const list1 = [1, 2, 3]
-const list2 = [1, 2, 3]
+const list1 = Array(80)
+    .fill(null)
+    .map((_, i) => ({
+        value: 2020 + i,
+        label: 2020 + i,
+    }))
+const list2 = Array(12)
+    .fill(null)
+    .map((_, i) => ({
+        value: i + 1,
+        label: i + 1,
+    }))
+
+const listData = [list1, list2]
 
 function TimeTitle() {
     const time = useTime()
@@ -24,53 +36,66 @@ function TimeTitle() {
                 {time.year} - {time.month}
             </View>
 
-            <Popup
-                visible={visible}
-                position="bottom"
-                style={{ height: '300px' }}
-                onClose={() => {
-                    setVisible(false)
-                }}
-                lockScroll
-            >
-                <View className={classnames('w-full', 'h-full', 'bg-base-100')}>
-                    <PickerView
-                        indicator-style="height: 50px;"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                        }}
-                        className={classnames('w-full')}
-                        indicatorClass={'indHeight'}
-                        immediateChange
-                        mask-class="picker-mask"
-                        onChange={(e) => {
-                            console.log(e)
-                        }}
-                        value={time.year}
+            <Overlay visible={visible} lockScroll>
+                <View
+                    className={classnames(
+                        'w-full',
+                        'h-full',
+                        'flex',
+                        'items-center',
+                        'justify-center',
+                    )}
+                >
+                    <View
+                        className={classnames(
+                            'w-[650px]',
+                            'rounded-xl',
+                            'bg-base-100',
+                            'overflow-hidden',
+                            'px-3',
+                            'py-2',
+                            'grid',
+                            'gap-2',
+                            'grid-rows-[auto_1fr_auto]',
+                        )}
                     >
-                        <PickerViewColumn>
-                            {list1.map((item, index) => (
-                                <View
-                                    key={index}
-                                    className={classnames(
-                                        'flex',
-                                        'items-center',
-                                        'justify-center',
-                                    )}
-                                >
-                                    {item}
-                                </View>
-                            ))}
-                        </PickerViewColumn>
-                        <PickerViewColumn>
-                            {list2.map((item, index) => (
-                                <View key={index}>{item}</View>
-                            ))}
-                        </PickerViewColumn>
-                    </PickerView>
+                        <View
+                            className={classnames(
+                                'text-center',
+                                'font-bold',
+                                'text-xl',
+                            )}
+                        >
+                            选择月份
+                        </View>
+                        <PickerView
+                            options={listData}
+                            className={classnames('!w-full', '!h-full')}
+                            onChange={(e) => {
+                                console.log(e)
+                            }}
+                        />
+                        <View
+                            className={classnames(
+                                'flex',
+                                'items-center',
+                                'justify-evenly',
+                            )}
+                        >
+                            <Button
+                                className={classnames(
+                                    'btn btn-active btn-ghost',
+                                )}
+                            >
+                                取消
+                            </Button>
+                            <Button className={classnames('btn btn-success')}>
+                                确定
+                            </Button>
+                        </View>
+                    </View>
                 </View>
-            </Popup>
+            </Overlay>
         </>
     )
 }
