@@ -3,6 +3,6 @@ module.exports = {
     fontName: 'myicon',
     classPrefix: 'myicon-',
     baseSelector: '.myicon',
-    types: ['woff2', 'woff', 'ttf'],
+    types: ['ttf'],
     fileName: 'iconfont.[fontname].[ext]',
 }

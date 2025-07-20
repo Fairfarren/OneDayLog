@@ -65,7 +65,7 @@ function TimeTitle() {
                         'text-lg',
                         'transition',
                         `${time.year}-${time.month}-${time.day}` === time.today
-                            ? 'text-base-content'
+                            ? 'text-base-content text-opacity-50'
                             : 'text-primary',
                     )}
                     onClick={backToDay}
