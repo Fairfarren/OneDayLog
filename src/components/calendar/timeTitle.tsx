@@ -22,6 +22,12 @@ const listData = [list1, list2]
 function TimeTitle() {
     const time = useTime()
     const [visible, setVisible] = useState(false)
+    const [tmpValue, setTempValue] = useState<number[]>([])
+
+    function updateTime() {
+        time.reset(`${tmpValue[0]}-${tmpValue[1]}`)
+        setVisible(false)
+    }
 
     return (
         <>
@@ -82,7 +88,7 @@ function TimeTitle() {
                             className={classnames('!w-full', '!h-full')}
                             defaultValue={[time.year, time.month]}
                             onChange={(e) => {
-                                console.log(e)
+                                setTempValue(e.value as number[])
                             }}
                         />
                         <View
@@ -96,10 +102,16 @@ function TimeTitle() {
                                 className={classnames(
                                     'btn btn-active btn-ghost',
                                 )}
+                                onClick={() => {
+                                    setVisible(false)
+                                }}
                             >
                                 取消
                             </Button>
-                            <Button className={classnames('btn btn-success')}>
+                            <Button
+                                className={classnames('btn btn-success')}
+                                onClick={updateTime}
+                            >
                                 确定
                             </Button>
                         </View>

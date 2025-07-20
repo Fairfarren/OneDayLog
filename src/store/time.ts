@@ -21,20 +21,24 @@ export const useTime = create(
                 update(data: Partial<TimeState>) {
                     set(data)
                 },
-                reset() {
-                    const days = dayjs()
+                reset(data?: string) {
+                    const days = dayjs(data)
                     const toMonth = days.month() + 1
-                    const toDay = days.date()
                     set({
                         year: days.year(),
                         month: toMonth,
-                        day: toDay,
-                        choiceDay: `${toMonth}-${toDay}`,
                         days: Array(days.daysInMonth())
                             .fill(null)
                             .map((_, i) => i + 1),
                         firstDayOfMonth: days.startOf('month').day(),
                     })
+                    if (!data || !this.day) {
+                        const toDay = days.date()
+                        set({
+                            day: toDay,
+                            choiceDay: `${toMonth}-${toDay}`,
+                        })
+                    }
                 },
             }
         },
