@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query'
 import { loadFontFace, useDidShow } from '@tarojs/taro'
 import { useEffect } from 'react'
+import './diy.font'
 
 if (typeof globalThis.AbortController === 'undefined') {
     // 简单的空实现，避免报错
@@ -42,6 +43,13 @@ function App(props) {
             family: 'alimama',
             scopes: ['webview', 'native'],
             source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/3b91e1b64cb787e106fb8fb1b58ed045.ttf")',
+        })
+
+        loadFontFace({
+            global: true,
+            scopes: ['webview', 'native'],
+            family: 'myicon', // 字体名称，需与 CSS 中 font-family 保持一致
+            source: 'url("/iconfont.myicon.ttf")', // 字体文件的 https 网络地址
         })
     }, [])
 
