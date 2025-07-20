@@ -8,8 +8,8 @@ import { memo, useState } from 'react'
 const list1 = Array(80)
     .fill(null)
     .map((_, i) => ({
-        value: 2020 + i,
-        label: 2020 + i + '年',
+        value: 2000 + i,
+        label: 2000 + i + '年',
     }))
 const list2 = Array(12)
     .fill(null)
@@ -24,7 +24,6 @@ function TimeTitle() {
     const time = useTime()
     const [visible, setVisible] = useState(false)
     const [tmpValue, setTempValue] = useState<number[]>([])
-    console.log('qwe')
 
     function updateTime() {
         time.reset(`${tmpValue[0]}-${tmpValue[1]}`)
