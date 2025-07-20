@@ -1,5 +1,4 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'node:path'
 import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 import devConfig from './dev'
@@ -70,24 +69,6 @@ export default defineConfig<'webpack5'>(async (merge) => {
                         },
                     },
                 })
-                chain.module
-                    .rule('webfonts')
-                    .test(/\.font\.js$/)
-                    .use('MiniCssExtractPlugin.loader')
-                    .loader(MiniCssExtractPlugin.loader)
-                    .end()
-                    .use('css-loader')
-                    .loader('css-loader')
-                    .options({ url: false })
-                    .end()
-                    .use('webfonts-loader')
-                    .loader('webfonts-loader')
-                    .end()
-                chain.plugin('MiniCssExtractPlugin').use(MiniCssExtractPlugin, [
-                    {
-                        filename: 'assets/[name].[contenthash:8].css',
-                    },
-                ])
             },
         },
         h5: {

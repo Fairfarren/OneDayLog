@@ -1,7 +1,6 @@
 import DaysCom from '@/components/calendar/daysCom'
 import TimeTitle from '@/components/calendar/timeTitle'
 import { useTime } from '@/store/time'
-// import { Swiper } from '@nutui/nutui-react-taro'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { useState } from 'react'
@@ -56,7 +55,7 @@ function Calendar() {
     }
 
     return (
-        <View className={classnames('box', 'bg', 'text-center')}>
+        <View className={classnames('box', 'text-center')}>
             <TimeTitle />
 
             <Week />
