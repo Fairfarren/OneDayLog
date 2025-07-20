@@ -29,6 +29,11 @@ function TimeTitle() {
         setVisible(false)
     }
 
+    function backToDay(e) {
+        e.stopPropagation()
+        time.reset(time.today)
+    }
+
     return (
         <>
             <View
@@ -51,17 +56,22 @@ function TimeTitle() {
                     className={classnames('myicon', 'myicon-unfold', 'text-xl')}
                 ></Text>
 
-                <Text
+                <View
                     className={classnames(
                         'absolute',
                         'right-0',
                         'top-1/2',
                         '-translate-y-1/2',
                         'text-lg',
+                        'transition',
+                        `${time.year}-${time.month}-${time.day}` === time.today
+                            ? 'text-base-content'
+                            : 'text-primary',
                     )}
+                    onClick={backToDay}
                 >
                     今
-                </Text>
+                </View>
             </View>
 
             <Overlay visible={visible} lockScroll>
@@ -97,6 +107,7 @@ function TimeTitle() {
                             选择月份
                         </View>
                         <PickerView
+                            duration={500}
                             options={listData}
                             className={classnames('!w-full', '!h-full')}
                             defaultValue={[time.year, time.month]}
