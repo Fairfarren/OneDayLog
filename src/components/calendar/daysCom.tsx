@@ -1,18 +1,20 @@
 import { useTime } from '@/store/time'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
+import dayjs from 'dayjs'
 import { useMemo } from 'react'
 
 function DaysCom() {
     const time = useTime()
 
-    const timeDay = useMemo(() => {
-        return `${time.month}-${time.day}`
-    }, [time])
+    const today = useMemo(() => {
+        const days = dayjs()
+        return `${days.month() + 1}-${days.date()}`
+    }, [])
 
     const getDoubleDay = useMemo(() => {
-        return time.choiceDay === timeDay ? timeDay : false
-    }, [timeDay, time])
+        return time.choiceDay === today ? today : false
+    }, [today, time])
 
     return (
         <View className={classnames('mt-2', 'grid', 'grid-cols-7', 'gap-2')}>
@@ -36,7 +38,7 @@ function DaysCom() {
                                 : classnames(
                                       time.choiceDay === monthDay &&
                                           'bg-base-content text-base-100 rounded-full',
-                                      timeDay === monthDay &&
+                                      today === monthDay &&
                                           'text-secondary border-secondary',
                                   ),
                         )}
