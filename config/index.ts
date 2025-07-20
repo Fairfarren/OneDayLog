@@ -85,7 +85,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
                     .end()
                 chain.plugin('MiniCssExtractPlugin').use(MiniCssExtractPlugin, [
                     {
-                        filename: 'static/css/[name].[contenthash:8].css',
+                        filename: 'assets/[name].[contenthash:8].css',
                     },
                 ])
             },
