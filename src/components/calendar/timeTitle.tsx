@@ -1,6 +1,7 @@
+import iconUnfold from '@/assets/icon/unfold.svg'
 import { useTime } from '@/store/time'
 import { Overlay, PickerView } from '@nutui/nutui-react-taro'
-import { Button, Text, View } from '@tarojs/components'
+import { Button, Image, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { useState } from 'react'
 
@@ -52,9 +53,7 @@ function TimeTitle() {
                 <Text>
                     {time.year} - {String(time.month).padStart(2, '0')}
                 </Text>
-                <Text
-                    className={classnames('myicon', 'myicon-unfold', 'text-xl')}
-                ></Text>
+                <Image src={iconUnfold} className={classnames('w-4', 'h-4')} />
 
                 <View
                     className={classnames(
