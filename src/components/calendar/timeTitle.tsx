@@ -1,6 +1,6 @@
 import { useTime } from '@/store/time'
 import { Overlay, PickerView } from '@nutui/nutui-react-taro'
-import { Button, View } from '@tarojs/components'
+import { Button, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { useState } from 'react'
 
@@ -27,13 +27,22 @@ function TimeTitle() {
         <>
             <View
                 className={classnames(
-                    'text-center',
                     'text-2xl',
                     'text-primary',
+                    'text-center',
+                    'flex',
+                    'items-center',
+                    'justify-center',
+                    'gap-1',
                 )}
                 onClick={() => setVisible(true)}
             >
-                {time.year} - {String(time.month).padStart(2, '0')}
+                <Text>
+                    {time.year} - {String(time.month).padStart(2, '0')}
+                </Text>
+                <Text
+                    className={classnames('myicon', 'myicon-unfold', 'text-xl')}
+                ></Text>
             </View>
 
             <Overlay visible={visible} lockScroll>
