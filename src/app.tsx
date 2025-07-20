@@ -39,9 +39,9 @@ function App(props) {
         console.log('===首次进入页面===')
         loadFontFace({
             global: true,
-            family: 'AaBuKeYan',
+            family: 'alimama',
             scopes: ['webview', 'native'],
-            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/bear/AaBuKeYan-2.ttf")',
+            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/3b91e1b64cb787e106fb8fb1b58ed045.ttf")',
         })
     }, [])
 
