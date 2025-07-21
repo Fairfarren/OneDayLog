@@ -101,6 +101,7 @@ function TimeTitle() {
                         'items-center',
                         'justify-center',
                     )}
+                    onClick={() => setVisible(false)}
                 >
                     <View
                         className={classnames(
@@ -115,6 +116,9 @@ function TimeTitle() {
                             'gap-2',
                             'grid-rows-[auto_1fr_auto]',
                         )}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                        }}
                     >
                         <View
                             className={classnames(

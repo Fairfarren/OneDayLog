@@ -55,7 +55,14 @@ function Calendar() {
     }
 
     return (
-        <View className={classnames('box', 'text-center')}>
+        <View
+            className={classnames(
+                'box',
+                'text-center',
+                '!bg-transparent',
+                '!shadow-none',
+            )}
+        >
             <TimeTitle />
 
             <Week />
