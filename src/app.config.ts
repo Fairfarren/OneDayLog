@@ -11,4 +11,5 @@ export default defineAppConfig({
     window: {},
     requiredPrivateInfos: [],
     permission: {},
+    darkmode: true,
 })

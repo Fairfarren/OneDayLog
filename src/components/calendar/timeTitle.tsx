@@ -1,4 +1,6 @@
+import iconUnfoldLight from '@/assets/icon/unfold-light.svg'
 import iconUnfold from '@/assets/icon/unfold.svg'
+import { useSystem } from '@/store/system'
 import { useTime } from '@/store/time'
 import { Overlay } from '@nutui/nutui-react-taro'
 import {
@@ -29,6 +31,7 @@ const listData = [list1, list2]
 
 function TimeTitle() {
     const time = useTime()
+    const system = useSystem()
     const [visible, setVisible] = useState(false)
     const [tmpValue, setTempValue] = useState<number[]>([])
 
@@ -66,7 +69,10 @@ function TimeTitle() {
                 <Text>
                     {time.year} - {String(time.month).padStart(2, '0')}
                 </Text>
-                <Image src={iconUnfold} className={classnames('w-4', 'h-4')} />
+                <Image
+                    src={system.theme === 'dark' ? iconUnfold : iconUnfoldLight}
+                    className={classnames('w-4', 'h-4')}
+                />
 
                 <View
                     className={classnames(
