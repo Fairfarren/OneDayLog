@@ -1,9 +1,16 @@
 import iconUnfold from '@/assets/icon/unfold.svg'
 import { useTime } from '@/store/time'
-import { Overlay, PickerView } from '@nutui/nutui-react-taro'
-import { Button, Image, Text, View } from '@tarojs/components'
+import { Overlay } from '@nutui/nutui-react-taro'
+import {
+    Button,
+    Image,
+    PickerView,
+    PickerViewColumn,
+    Text,
+    View,
+} from '@tarojs/components'
 import classnames from 'classnames'
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 
 const list1 = Array(80)
     .fill(null)
@@ -25,8 +32,17 @@ function TimeTitle() {
     const [visible, setVisible] = useState(false)
     const [tmpValue, setTempValue] = useState<number[]>([])
 
+    const defaultValue = useMemo(() => {
+        if (tmpValue.length) {
+            return tmpValue
+        }
+        const value1 = list1.findIndex((item) => item.value === time.year)
+        const value2 = list2.findIndex((item) => item.value === time.month)
+        return [value1, value2]
+    }, [time, tmpValue])
+
     function updateTime() {
-        time.reset(`${tmpValue[0]}-${tmpValue[1]}`)
+        time.reset(`${list1[tmpValue[0]].value}-${list2[tmpValue[1]].value}`)
         setVisible(false)
     }
 
@@ -86,6 +102,7 @@ function TimeTitle() {
                     <View
                         className={classnames(
                             'w-[650px]',
+                            'h-[900px]',
                             'rounded-xl',
                             'bg-base-100',
                             'overflow-hidden',
@@ -106,14 +123,42 @@ function TimeTitle() {
                             选择月份
                         </View>
                         <PickerView
-                            duration={500}
-                            options={listData}
                             className={classnames('!w-full', '!h-full')}
-                            defaultValue={[time.year, time.month]}
+                            defaultValue={defaultValue}
                             onChange={(e) => {
-                                setTempValue(e.value as number[])
+                                setTempValue([
+                                    e.detail.value[0],
+                                    e.detail.value[1],
+                                ])
                             }}
-                        />
+                            indicatorClass="indHeight"
+                            immediateChange
+                            mask-class="picker-mask"
+                        >
+                            {listData.map((list, i) => (
+                                <PickerViewColumn
+                                    key={i}
+                                    className={classnames('pick-view')}
+                                >
+                                    {list.map((item, ii) => (
+                                        <View
+                                            key={ii}
+                                            className={classnames(
+                                                'pick-active',
+                                                'w-full',
+                                                'h-full',
+                                                'flex',
+                                                'items-center',
+                                                'justify-center',
+                                                'text-lg',
+                                            )}
+                                        >
+                                            {item.label}
+                                        </View>
+                                    ))}
+                                </PickerViewColumn>
+                            ))}
+                        </PickerView>
                         <View
                             className={classnames(
                                 'flex',
