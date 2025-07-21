@@ -10,7 +10,7 @@ import {
     View,
 } from '@tarojs/components'
 import classnames from 'classnames'
-import { memo, useMemo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 const list1 = Array(80)
     .fill(null)
@@ -32,15 +32,6 @@ function TimeTitle() {
     const [visible, setVisible] = useState(false)
     const [tmpValue, setTempValue] = useState<number[]>([])
 
-    const defaultValue = useMemo(() => {
-        if (tmpValue.length) {
-            return tmpValue
-        }
-        const value1 = list1.findIndex((item) => item.value === time.year)
-        const value2 = list2.findIndex((item) => item.value === time.month)
-        return [value1, value2]
-    }, [time, tmpValue])
-
     function updateTime() {
         time.reset(`${list1[tmpValue[0]].value}-${list2[tmpValue[1]].value}`)
         setVisible(false)
@@ -50,6 +41,12 @@ function TimeTitle() {
         e.stopPropagation()
         time.reset(time.today)
     }
+
+    useEffect(() => {
+        const value1 = list1.findIndex((item) => item.value === time.year)
+        const value2 = list2.findIndex((item) => item.value === time.month)
+        setTempValue([value1, value2])
+    }, [time])
 
     return (
         <>
@@ -124,7 +121,7 @@ function TimeTitle() {
                         </View>
                         <PickerView
                             className={classnames('!w-full', '!h-full')}
-                            defaultValue={defaultValue}
+                            value={tmpValue}
                             onChange={(e) => {
                                 setTempValue([
                                     e.detail.value[0],
@@ -132,25 +129,25 @@ function TimeTitle() {
                                 ])
                             }}
                             indicatorClass="indHeight"
-                            immediateChange
                             mask-class="picker-mask"
                         >
                             {listData.map((list, i) => (
-                                <PickerViewColumn
-                                    key={i}
-                                    className={classnames('pick-view')}
-                                >
+                                <PickerViewColumn key={i}>
                                     {list.map((item, ii) => (
                                         <View
                                             key={ii}
                                             className={classnames(
-                                                'pick-active',
                                                 'w-full',
                                                 'h-full',
                                                 'flex',
                                                 'items-center',
                                                 'justify-center',
                                                 'text-lg',
+                                                i === 0
+                                                    ? ii === tmpValue[0] &&
+                                                          '!text-accent'
+                                                    : ii === tmpValue[1] &&
+                                                          '!text-accent',
                                             )}
                                         >
                                             {item.label}
