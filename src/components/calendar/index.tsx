@@ -60,6 +60,7 @@ function Calendar() {
                 'text-center',
                 '!bg-transparent',
                 '!shadow-none',
+                '!mt-0',
             )}
         >
             <Week />

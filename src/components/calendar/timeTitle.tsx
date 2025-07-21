@@ -20,11 +20,10 @@ function TimeTitle() {
             <View
                 className={classnames(
                     'text-2xl',
+                    'font-bold',
                     'text-primary',
-                    'text-center',
                     'flex',
                     'items-center',
-                    'justify-center',
                     'gap-1',
                     'relative',
                 )}

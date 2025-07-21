@@ -8,7 +8,6 @@ function Week() {
     return (
         <View
             className={classnames(
-                'mt-2',
                 'grid',
                 'grid-cols-7',
                 'kbd',
