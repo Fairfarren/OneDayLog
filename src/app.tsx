@@ -1,4 +1,5 @@
 import QueryProvider from '@/components/globalConfig/queryProvider'
+import { useSystem } from '@/store/system'
 import { clearUserInfo, toSetCode } from '@/store/user'
 import './app.scss'
 import {
@@ -6,7 +7,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import { loadFontFace, useDidShow } from '@tarojs/taro'
+import { loadFontFace, onThemeChange, useDidShow } from '@tarojs/taro'
 import { useEffect } from 'react'
 
 if (typeof globalThis.AbortController === 'undefined') {
@@ -42,6 +43,12 @@ function App(props) {
             family: 'alimama',
             scopes: ['webview', 'native'],
             source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/3b91e1b64cb787e106fb8fb1b58ed045.ttf")',
+        })
+
+        onThemeChange((e) => {
+            useSystem.getState().update({
+                theme: e.theme,
+            })
         })
     }, [])
 
