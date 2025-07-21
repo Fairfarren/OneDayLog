@@ -92,10 +92,10 @@ page {
 .picker-mask {
     background: linear-gradient(
         0deg,
-        hsl(var(--b2) / 0.8) 0%,
+        hsl(var(--b1) / 0.8) 0%,
         hsl(var(--b2) / 0) 33%,
         hsl(var(--b2) / 0) 66%,
-        hsl(var(--b2) / 0.8) 100%
+        hsl(var(--b1) / 0.8) 100%
     );
     background-size: 100% 100% !important;
     background-position: center center;
