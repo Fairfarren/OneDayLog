@@ -1,7 +1,7 @@
 import iconLoading from '@/assets/icon/loading.svg'
+import DiyHeader from '@/components/diyWindows'
 import PATH_URL from '@/const/path'
 import { Share as AShare, type ShareProps } from '@taro-react-tools/components'
-import { View } from '@tarojs/components'
 import classnames from 'classnames'
 import { memo } from 'react'
 
@@ -37,9 +37,7 @@ export const Share = memo((props: ShareProps) => {
                 {props.children}
             </AShare>
 
-            <View
-                className={classnames('fixed', 'top-0', 'left-0', 'z-[999999]')}
-            ></View>
+            <DiyHeader />
         </>
     )
 })

@@ -1,5 +1,4 @@
 import DaysCom from '@/components/calendar/daysCom'
-import TimeTitle from '@/components/calendar/timeTitle'
 import { useTime } from '@/store/time'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 import classnames from 'classnames'
@@ -63,8 +62,6 @@ function Calendar() {
                 '!shadow-none',
             )}
         >
-            <TimeTitle />
-
             <Week />
 
             <Swiper
