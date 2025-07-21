@@ -2,10 +2,10 @@ import { useWindowsConfig, WindowType } from '@/store/system'
 import { Overlay } from '@nutui/nutui-react-taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
-import { ReactNode } from 'react'
+import { memo, ReactNode } from 'react'
 import ChoiceData from './ChoiceData'
 
-function DiyHeader() {
+function DiyWindows() {
     const windowsConfig = useWindowsConfig()
 
     const obj: {
@@ -13,8 +13,6 @@ function DiyHeader() {
     } = {
         [WindowType.选择日期]: <ChoiceData />,
     }
-
-    console.log(windowsConfig, obj)
 
     return (
         <Overlay visible={windowsConfig.visible} lockScroll>
@@ -34,4 +32,4 @@ function DiyHeader() {
     )
 }
 
-export default DiyHeader
+export default memo(DiyWindows)
