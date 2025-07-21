@@ -7,7 +7,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import { loadFontFace, onThemeChange, useDidShow } from '@tarojs/taro'
+import { onThemeChange, useDidShow } from '@tarojs/taro'
 import { useEffect } from 'react'
 
 if (typeof globalThis.AbortController === 'undefined') {
@@ -38,12 +38,6 @@ const queryClient = new QueryClient({
 function App(props) {
     useEffect(() => {
         console.log('===首次进入页面===')
-        loadFontFace({
-            global: true,
-            family: 'alimama',
-            scopes: ['webview', 'native'],
-            source: 'url("https://remember-quick.oss-cn-chengdu.aliyuncs.com/app/3b91e1b64cb787e106fb8fb1b58ed045.ttf")',
-        })
 
         onThemeChange((e) => {
             useSystem.getState().update({
