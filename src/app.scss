@@ -121,6 +121,11 @@ button {
     }
 }
 
+.kbd {
+    border-width: 2px;
+    border-bottom-width: 4px;
+}
+
 .nut-pickerview-roller {
     .nut-pickerview-roller-item {
         @apply text-base-content text-lg flex items-center justify-center !important;
