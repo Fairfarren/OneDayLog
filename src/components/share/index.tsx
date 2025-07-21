@@ -1,9 +1,11 @@
 import iconLoading from '@/assets/icon/loading.svg'
 import DiyHeader from '@/components/diyWindows'
 import PATH_URL from '@/const/path'
+import { useTime } from '@/store/time'
 import { Share as AShare, type ShareProps } from '@taro-react-tools/components'
+import { View } from '@tarojs/components'
 import classnames from 'classnames'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 export const shareOption = {
     title: '我在用小熊配货宝，自动打印配货单，好用！点击领积分！',
@@ -16,6 +18,8 @@ export const shareOption = {
  * @param {string?} className
  */
 export const Share = memo((props: ShareProps) => {
+    const [scrollTop, setScrollTop] = useState('')
+
     async function buttonShareBefore(e) {
         if (e.target.dataset?.type === 'shareCard') {
             return {
@@ -25,19 +29,34 @@ export const Share = memo((props: ShareProps) => {
         return props.promise?.(e)
     }
 
+    useEffect(() => {
+        useTime.subscribe(() => {
+            setScrollTop('backTop')
+            setTimeout(() => {
+                setScrollTop('')
+            }, 300)
+        })
+    }, [])
+
     return (
         <>
             <AShare
                 {...props}
                 className={classnames(props.className)}
+                scrollIntoView={scrollTop}
                 promise={buttonShareBefore}
                 shareOption={{ ...shareOption, ...props.shareOption }}
                 loadingImg={iconLoading}
             >
-                {props.children}
+                <>
+                    <View id="backTop" />
+                    {props.children}
+                </>
             </AShare>
 
-            <DiyHeader />
+            <View>
+                <DiyHeader />
+            </View>
         </>
     )
 })

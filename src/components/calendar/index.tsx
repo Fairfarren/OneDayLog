@@ -2,7 +2,7 @@ import DaysCom from '@/components/calendar/daysCom'
 import { useTime } from '@/store/time'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 import classnames from 'classnames'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Week from './week'
 
 function Calendar() {
@@ -13,7 +13,6 @@ function Calendar() {
     })
 
     function changeTime(e) {
-        console.log('onChange')
         setConfig((data) => ({
             ...data,
             current: e.detail.current,
@@ -87,4 +86,4 @@ function Calendar() {
     )
 }
 
-export default Calendar
+export default memo(Calendar)

@@ -1,10 +1,10 @@
 import Calendar from '@/components/calendar'
 import TimeTitle from '@/components/calendar/timeTitle'
 import DiyHeader from '@/components/diyHeader'
-import EventCard from '@/components/eventCard'
 import { Share } from '@/components/share'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
+import List from './List'
 
 const Index = () => {
     return (
@@ -16,11 +16,7 @@ const Index = () => {
             </DiyHeader>
             <View className={classnames('container')}>
                 <Calendar />
-                <View className={classnames('mt-3')}>
-                    {Array.from(Array(10).keys()).map((_, i) => (
-                        <EventCard key={i} />
-                    ))}
-                </View>
+                <List />
                 <View className="occupy-bottom" />
             </View>
         </Share>
