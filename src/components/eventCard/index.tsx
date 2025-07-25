@@ -22,7 +22,10 @@ function EventCard() {
             </View>
             <View className={classnames('mt-2', 'flex', 'flex-wrap', 'gap-2')}>
                 {Array.from(Array(10).keys()).map((_, i) => (
-                    <View className={classnames('badge', 'badge-neutral')}>
+                    <View
+                        className={classnames('badge', 'badge-neutral')}
+                        key={i}
+                    >
                         # 标签{i}
                     </View>
                 ))}
