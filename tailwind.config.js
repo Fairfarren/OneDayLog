@@ -14,23 +14,23 @@ module.exports = {
         themes: [
             {
                 light: {
-                    primary: '#ef9995',
+                    primary: '#0fc19b',
 
-                    secondary: '#a4cbb4',
+                    secondary: '#db7f6b',
 
-                    accent: '#dc8850',
+                    accent: '#87c7f2',
 
-                    neutral: '#2e282a',
+                    neutral: '#2d2037',
 
-                    'base-100': '#e4d8b4',
+                    'base-100': '#f4f2f7',
 
-                    info: '#2463eb',
+                    info: '#4170c8',
 
-                    success: '#16a249',
+                    success: '#20d56b',
 
-                    warning: '#db7706',
+                    warning: '#dea30d',
 
-                    error: '#dc2828',
+                    error: '#f44867',
                 },
             },
             {
