@@ -1,8 +1,8 @@
 {
-    "name": "re-time",
+    "name": "one-day-log",
     "version": "1.0.0",
     "private": true,
-    "description": "时间回顾",
+    "description": "一日所记",
     "templateInfo": {
         "name": "taro-ui",
         "typescript": true,
