@@ -35,8 +35,14 @@
         "swc": false,
         "disableSWC": true
     },
-    "editorSetting": { "tabIndent": "insertSpaces", "tabSize": 2 },
-    "packOptions": { "ignore": [], "include": [] },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 2
+    },
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
     "appid": "wxf6bb263f89d3aeba",
     "projectname": "one-day-log",
     "libVersion": "3.8.10",
