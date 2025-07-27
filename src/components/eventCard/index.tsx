@@ -1,37 +1,62 @@
-import { Text, View } from '@tarojs/components'
+import { ClassEventInfo } from '@/store/event'
+import { ShareElement, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
+import { memo } from 'react'
 
-function EventCard() {
+type Data = Pick<ClassEventInfo, 'tag' | 'title' | 'sub' | 'id'>
+
+function EventCard(props: {
+    data: Data
+    onClick?: (_: Data) => void
+    showShadow: boolean
+}) {
     return (
-        <View className={classnames('box')}>
-            <View
+        <View
+            className={classnames(
+                'box',
+                !props.showShadow && '!shadow-none !p-0 mt-0',
+            )}
+            onClick={(e) => {
+                e.stopPropagation()
+                props.onClick?.(props.data)
+            }}
+        >
+            <ShareElement
                 className={classnames('text-xl', 'font-bold', 'text-primary')}
+                transform
+                mapkey={`EventCard-title-${props.data.id}`}
             >
-                <Text>这里是事件名称</Text>
-            </View>
-            <View
+                <Text>{props.data.title}</Text>
+            </ShareElement>
+            <ShareElement
+                transform
+                mapkey={`EventCard-Sub-${props.data.id}`}
                 className={classnames(
                     'mt-2',
                     'text-lg',
                     'w-full',
-                    'truncate',
                     'text-opacity-80',
+                    props.showShadow && 'truncate',
                 )}
             >
-                这里是副标题这里是副标题这里是副标题这里是副标题这里是副标题这里是副标题
-            </View>
-            <View className={classnames('mt-2', 'flex', 'flex-wrap', 'gap-2')}>
-                {Array.from(Array(10).keys()).map((_, i) => (
+                {props.data.sub}
+            </ShareElement>
+            <ShareElement
+                transform
+                mapkey={`EventCard-tag-${props.data.id}`}
+                className={classnames('mt-2', 'flex', 'flex-wrap', 'gap-2')}
+            >
+                {props.data.tag.map((tag, i) => (
                     <View
                         className={classnames('badge', 'badge-neutral')}
                         key={i}
                     >
-                        # 标签{i}
+                        # {tag}
                     </View>
                 ))}
-            </View>
+            </ShareElement>
         </View>
     )
 }
 
-export default EventCard
+export default memo(EventCard)
