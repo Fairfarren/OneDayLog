@@ -7,7 +7,7 @@ import { Image, ShareElement, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { memo } from 'react'
 
-function TimeTitle() {
+function TimeTitle(props?: { showDay?: boolean }) {
     const time = useTime()
     const system = useSystem()
     const eventInfo = useEventInfo()
@@ -45,6 +45,8 @@ function TimeTitle() {
             <View className={classnames('flex', 'items-center', 'gap-1')}>
                 <Text>
                     {time.year} - {String(time.month).padStart(2, '0')}
+                    {props?.showDay &&
+                        `- ${String(time.choiceDay.split('-').at(-1)).padStart(2, '0')}`}
                 </Text>
                 {!eventInfo.id && (
                     <Image

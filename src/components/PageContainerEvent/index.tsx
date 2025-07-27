@@ -61,7 +61,7 @@ function PageContainerEvent() {
                         'relative',
                     )}
                 >
-                    <TimeTitle />
+                    <TimeTitle showDay />
                     <View className={classnames('mt-3', 'grid', 'gap-2')}>
                         {eventInfo.id ? (
                             <EventCard data={eventInfo} showShadow={false} />
