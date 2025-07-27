@@ -13,6 +13,8 @@ function Week() {
                 'kbd',
                 'kbd-md',
                 'bg-base-100',
+                'p-0',
+                'gap-2',
             )}
         >
             {titleList.map((item, i) => (

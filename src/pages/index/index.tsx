@@ -4,8 +4,8 @@ import DiyHeader from '@/components/diyHeader'
 import { Share } from '@/components/share'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
-import List from './List'
 import AddFixed from './AddFixed'
+import List from './List'
 
 const Index = () => {
     return (
