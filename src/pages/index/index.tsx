@@ -5,6 +5,7 @@ import { Share } from '@/components/share'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 import List from './List'
+import AddFixed from './AddFixed'
 
 const Index = () => {
     return (
@@ -17,6 +18,7 @@ const Index = () => {
             <View className={classnames('container')}>
                 <Calendar />
                 <List />
+                <AddFixed />
                 <View className="occupy-bottom" />
             </View>
         </Share>
