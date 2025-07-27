@@ -1,24 +1,9 @@
 import TimeTitle from '@/components/calendar/timeTitle'
+import EventCard from '@/components/eventCard'
+import Form from '@/components/PageContainerEvent/Form'
 import { useEventInfo } from '@/store/event'
-import { Input, PageContainer, View } from '@tarojs/components'
+import { PageContainer, View } from '@tarojs/components'
 import classnames from 'classnames'
-
-const formObj = [
-    {
-        key: 'title',
-        label: '名称',
-        placeholder: '要记录什么事情',
-    },
-    {
-        key: 'sub',
-        label: '备注',
-        placeholder: '还有什么需要备注的吗',
-    },
-    {
-        key: 'tag',
-        label: '标签',
-    },
-]
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
@@ -56,35 +41,11 @@ function PageContainerEvent() {
                 >
                     <TimeTitle />
                     <View className={classnames('mt-3', 'grid', 'gap-2')}>
-                        {formObj.map((item) => (
-                            <View
-                                key={item.key}
-                                className={classnames(
-                                    'flex',
-                                    'items-center',
-                                    'gap-2',
-                                    'text-lg',
-                                )}
-                            >
-                                <View className={classnames('font-medium')}>
-                                    {item.label}
-                                </View>
-                                <View>
-                                    {item.key === 'tag' ? (
-                                        <View>tag</View>
-                                    ) : (
-                                        <Input
-                                            value={eventInfo[item.key]}
-                                            onInput={(e) =>
-                                                eventInfo.update({
-                                                    [item.key]: e.detail.value,
-                                                })
-                                            }
-                                        />
-                                    )}
-                                </View>
-                            </View>
-                        ))}
+                        {eventInfo.id ? (
+                            <EventCard data={eventInfo} showShadow={false} />
+                        ) : (
+                            <Form />
+                        )}
                     </View>
                 </View>
             </View>
