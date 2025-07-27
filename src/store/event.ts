@@ -19,7 +19,9 @@ export const useEventInfo = create(
                 })
             },
             close() {
-                this.reset()
+                set({
+                    show: false,
+                })
             },
             update(data: Partial<ClassEventInfo>) {
                 set(data)
