@@ -1,12 +1,10 @@
 import iconAddLight from '@/assets/icon/add-light.svg'
 import iconAdd from '@/assets/icon/add.svg'
-import PATH_URL from '@/const/path'
 import { useSystem } from '@/store/system'
-import { navigateTo } from '@/utils'
 import { Image, View } from '@tarojs/components'
 import classnames from 'classnames'
 
-function AddFixed() {
+function AddFixed(props: { onClick: () => void }) {
     const { theme } = useSystem()
 
     return (
@@ -24,7 +22,7 @@ function AddFixed() {
                 'justify-center',
                 'shadow-lg',
             )}
-            onClick={() => navigateTo(PATH_URL.ADD_EVENT)}
+            onClick={props.onClick}
         >
             <Image
                 src={theme === 'dark' ? iconAdd : iconAddLight}
