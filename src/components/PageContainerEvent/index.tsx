@@ -62,7 +62,7 @@ function PageContainerEvent() {
                     )}
                 >
                     <TimeTitle showDay />
-                    <View className={classnames('mt-3', 'grid', 'gap-2')}>
+                    <View className={classnames('mt-3', 'grid', 'gap-4')}>
                         {eventInfo.id ? (
                             <EventCard data={eventInfo} showShadow={false} />
                         ) : (
