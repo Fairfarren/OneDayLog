@@ -28,20 +28,25 @@ function Form() {
                 <View
                     key={item.key}
                     className={classnames(
+                        'w-full',
                         'flex',
                         'items-center',
                         'gap-2',
                         'text-lg',
                     )}
                 >
-                    <View className={classnames('font-medium')}>
+                    <View
+                        className={classnames('font-medium', 'flex-shrink-0')}
+                    >
                         {item.label}
                     </View>
-                    <View>
+                    <View className={classnames('flex-shrink', 'w-full')}>
                         {item.key === 'tag' ? (
                             <View>tag</View>
                         ) : (
                             <Input
+                                className={classnames('w-full')}
+                                placeholder={item.placeholder}
                                 value={eventInfo[item.key]}
                                 onInput={(e) =>
                                     eventInfo.update({
