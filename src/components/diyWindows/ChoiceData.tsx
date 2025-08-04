@@ -2,7 +2,8 @@ import { useWindowsConfig } from '@/store/system'
 import { useTime } from '@/store/time'
 import { Button, PickerView, PickerViewColumn, View } from '@tarojs/components'
 import classnames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import dayjs from 'dayjs'
 
 const list1 = Array(80)
     .fill(null)
@@ -17,22 +18,45 @@ const list2 = Array(12)
         label: i + 1 + '月',
     }))
 
-const listData = [list1, list2]
+let listData = [list1, list2]
 
 function ChoiceData() {
     const windowsConfig = useWindowsConfig()
     const [tmpValue, setTempValue] = useState<number[]>([])
     const time = useTime()
 
+    const daysList = useMemo(() => {
+        const days = dayjs(
+            tmpValue.length === 0
+                ? time.choiceDay
+                : list1[tmpValue[0]].value + '-' + list2[tmpValue[1]].value,
+        )
+        return Array(days.daysInMonth())
+            .fill(null)
+            .map((_, i) => ({
+                value: i + 1,
+                label: i + 1 + '日',
+            }))
+    }, [tmpValue])
+
+    if (windowsConfig.props?.showDay) {
+        listData = [list1, list2, daysList]
+    } else {
+        listData = [list1, list2]
+    }
+
     function updateTime() {
-        time.reset(`${list1[tmpValue[0]].value}-${list2[tmpValue[1]].value}`)
+        time.reset(
+            `${list1[tmpValue[0]].value}-${list2[tmpValue[1]].value}${windowsConfig.props?.showDay ? `-${daysList[tmpValue[2]].value}` : ''}`,
+        )
         windowsConfig.close()
     }
 
     useEffect(() => {
         const value1 = list1.findIndex((item) => item.value === time.year)
         const value2 = list2.findIndex((item) => item.value === time.month)
-        setTempValue([value1, value2])
+        const value3 = Number(time.choiceDay.split('-').at(-1)) - 1
+        setTempValue([value1, value2, value3])
     }, [time])
 
     return (
@@ -76,7 +100,11 @@ function ChoiceData() {
                     className={classnames('!w-full', '!h-full')}
                     value={tmpValue}
                     onChange={(e) => {
-                        setTempValue([e.detail.value[0], e.detail.value[1]])
+                        setTempValue([
+                            e.detail.value[0],
+                            e.detail.value[1],
+                            e.detail.value[2],
+                        ])
                     }}
                     indicatorClass="indHeight"
                     mask-class="picker-mask"
@@ -96,8 +124,11 @@ function ChoiceData() {
                                         i === 0
                                             ? ii === tmpValue[0] &&
                                                   '!text-accent'
-                                            : ii === tmpValue[1] &&
-                                                  '!text-accent',
+                                            : i === 1
+                                              ? ii === tmpValue[1] &&
+                                                '!text-accent'
+                                              : ii === tmpValue[2] &&
+                                                '!text-accent',
                                     )}
                                 >
                                     {item.label}

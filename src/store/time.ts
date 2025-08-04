@@ -28,6 +28,7 @@ export const useTime = create(
                     const days = dayjs(data)
                     const toYear = days.year()
                     const toMonth = days.month() + 1
+                    const hasDay = data?.split('-').length === 3
                     set({
                         year: toYear,
                         month: toMonth,
@@ -36,6 +37,11 @@ export const useTime = create(
                             .map((_, i) => i + 1),
                         firstDayOfMonth: days.startOf('month').day(),
                     })
+                    if (hasDay) {
+                        set({
+                            choiceDay: `${toYear}-${toMonth}-${days.date()}`,
+                        })
+                    }
                     if (!data || !this.day) {
                         const toDay = days.date()
                         set({
