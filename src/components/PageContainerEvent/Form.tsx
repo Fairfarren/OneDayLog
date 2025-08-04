@@ -1,6 +1,10 @@
-import { useEventInfo } from '@/store/event'
-import { Button, Input, View, Form } from '@tarojs/components'
+import { Input, View } from '@tarojs/components'
 import classnames from 'classnames'
+import { useImperativeHandle, useState, forwardRef } from 'react'
+
+export interface FormRef {
+    addTag: (tag: string) => void
+}
 
 const formObj = [
     {
@@ -19,7 +23,26 @@ const formObj = [
     },
 ]
 
-function FormCom() {
+function FormCom(
+    props: {
+        openTag: () => void
+    },
+    ref,
+) {
+    const [tags, setTags] = useState<string[]>([])
+
+    function addTag(tag: string) {
+        setTags((e) => {
+            const set = new Set(e)
+            set.add(tag)
+            return Array.from(set)
+        })
+    }
+
+    useImperativeHandle(ref, () => ({
+        addTag,
+    }))
+
     return (
         <>
             {formObj.map((item) => (
@@ -28,7 +51,7 @@ function FormCom() {
                     className={classnames(
                         'w-full',
                         'flex',
-                        'items-center',
+                        'items-start',
                         'gap-2',
                         'text-lg',
                     )}
@@ -40,7 +63,36 @@ function FormCom() {
                     </View>
                     <View className={classnames('flex-shrink', 'w-full')}>
                         {item.key === 'tag' ? (
-                            <View>tag</View>
+                            <View
+                                className={classnames(
+                                    'flex',
+                                    'items-center',
+                                    'gap-2',
+                                    'flex-wrap',
+                                )}
+                            >
+                                {tags.map((tag, index) => (
+                                    <View
+                                        key={index}
+                                        className={classnames(
+                                            'badge',
+                                            'badge-neutral',
+                                        )}
+                                    >
+                                        # {tag}
+                                    </View>
+                                ))}
+                                <View
+                                    className={classnames(
+                                        'kbd',
+                                        'kbd-md',
+                                        'bg-base-100',
+                                    )}
+                                    onClick={props.openTag}
+                                >
+                                    +
+                                </View>
+                            </View>
                         ) : (
                             <Input
                                 name={item.key}
@@ -55,4 +107,4 @@ function FormCom() {
     )
 }
 
-export default FormCom
+export default forwardRef(FormCom)

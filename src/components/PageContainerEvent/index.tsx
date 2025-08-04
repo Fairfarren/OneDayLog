@@ -4,15 +4,26 @@ import iconSubmitLight from '@/assets/icon/submit-light.svg'
 import iconSubmit from '@/assets/icon/submit.svg'
 import TimeTitle from '@/components/calendar/timeTitle'
 import EventCard from '@/components/eventCard'
-import FormCom from '@/components/PageContainerEvent/Form'
+import FormCom, { type FormRef } from '@/components/PageContainerEvent/Form'
 import { useEventInfo } from '@/store/event'
 import { useSystem } from '@/store/system'
-import { Button, Form, Image, PageContainer, View } from '@tarojs/components'
+import {
+    Input,
+    Button,
+    Form,
+    Image,
+    PageContainer,
+    View,
+} from '@tarojs/components'
 import classnames from 'classnames'
+import { Overlay } from '@nutui/nutui-react-taro'
+import { useRef, useState } from 'react'
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
     const system = useSystem()
+    const [visible, setVisible] = useState(false)
+    const form = useRef<FormRef>(null)
 
     const iconList = [
         {
@@ -74,7 +85,10 @@ function PageContainerEvent() {
                         {eventInfo.id ? (
                             <EventCard data={eventInfo} showShadow={false} />
                         ) : (
-                            <FormCom />
+                            <FormCom
+                                ref={form}
+                                openTag={() => setVisible(true)}
+                            />
                         )}
                     </View>
 
@@ -116,6 +130,69 @@ function PageContainerEvent() {
                     </View>
                 </View>
             </Form>
+            <Overlay visible={visible}>
+                <View
+                    className={classnames(
+                        'w-screen',
+                        'h-screen',
+                        'flex',
+                        'items-center',
+                        'justify-center',
+                    )}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        setVisible(false)
+                    }}
+                >
+                    <Form
+                        className={classnames(
+                            'box',
+                            'w-[650px]',
+                            'py-5',
+                            'px-3',
+                            'box-border',
+                        )}
+                        onSubmit={(e) => {
+                            e.preventDefault()
+                            if (e.detail.value?.tag) {
+                                form.current?.addTag(e.detail.value.tag)
+                            }
+                            setVisible(false)
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                        }}
+                    >
+                        <View>
+                            <Input
+                                className={classnames('w-full', 'text-base')}
+                                placeholder="输入标签名称"
+                                name="tag"
+                            />
+                        </View>
+                        <View
+                            className={classnames(
+                                'flex',
+                                'justify-center',
+                                'mt-3',
+                            )}
+                        >
+                            <Button
+                                className={classnames(
+                                    'btn',
+                                    'btn-primary',
+                                    '!h-auto',
+                                    '!py-2',
+                                    '!min-h-1',
+                                )}
+                                formType="submit"
+                            >
+                                确认
+                            </Button>
+                        </View>
+                    </Form>
+                </View>
+            </Overlay>
         </PageContainer>
     )
 }
