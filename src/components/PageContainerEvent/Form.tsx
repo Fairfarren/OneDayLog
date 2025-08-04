@@ -4,6 +4,7 @@ import { useImperativeHandle, useState, forwardRef } from 'react'
 
 export interface FormRef {
     addTag: (tag: string) => void
+    clear: () => void
 }
 
 const formObj = [
@@ -41,6 +42,9 @@ function FormCom(
 
     useImperativeHandle(ref, () => ({
         addTag,
+        clear() {
+            setTags([])
+        },
     }))
 
     return (
