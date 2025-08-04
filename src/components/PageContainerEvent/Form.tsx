@@ -51,9 +51,9 @@ function FormCom(
                     className={classnames(
                         'w-full',
                         'flex',
-                        'items-start',
                         'gap-2',
                         'text-lg',
+                        item.key === 'tag' ? 'items-start' : 'items-center',
                     )}
                 >
                     <View
