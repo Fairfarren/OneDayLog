@@ -4,10 +4,10 @@ import iconSubmitLight from '@/assets/icon/submit-light.svg'
 import iconSubmit from '@/assets/icon/submit.svg'
 import TimeTitle from '@/components/calendar/timeTitle'
 import EventCard from '@/components/eventCard'
-import Form from '@/components/PageContainerEvent/Form'
+import FormCom from '@/components/PageContainerEvent/Form'
 import { useEventInfo } from '@/store/event'
 import { useSystem } from '@/store/system'
-import { Image, PageContainer, View } from '@tarojs/components'
+import { Button, Form, Image, PageContainer, View } from '@tarojs/components'
 import classnames from 'classnames'
 
 function PageContainerEvent() {
@@ -22,12 +22,15 @@ function PageContainerEvent() {
                 eventInfo.close()
             },
         },
-        {
+    ]
+
+    if (!eventInfo.id) {
+        iconList.push({
             dark: iconSubmit,
             light: iconSubmitLight,
             onClick() {},
-        },
-    ]
+        })
+    }
 
     return (
         <PageContainer
@@ -39,7 +42,12 @@ function PageContainerEvent() {
                 eventInfo.reset()
             }}
         >
-            <View
+            <Form
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    console.log('Form submitted', e)
+                    // Handle form submission logic here
+                }}
                 className={classnames(
                     'w-screen',
                     'h-screen',
@@ -66,7 +74,7 @@ function PageContainerEvent() {
                         {eventInfo.id ? (
                             <EventCard data={eventInfo} showShadow={false} />
                         ) : (
-                            <Form />
+                            <FormCom />
                         )}
                     </View>
 
@@ -82,20 +90,32 @@ function PageContainerEvent() {
                         )}
                     >
                         {iconList.map((icon, index) => (
-                            <Image
+                            <Button
+                                className={classnames(
+                                    'default-button',
+                                    'w-12',
+                                    'h-12',
+                                    'rounded-full',
+                                )}
                                 key={index}
-                                src={
-                                    system.theme === 'dark'
-                                        ? icon.dark
-                                        : icon.light
-                                }
+                                formType={index === 1 ? 'submit' : undefined}
                                 onClick={icon.onClick}
-                                className={classnames('w-12', 'h-12')}
-                            />
+                            >
+                                <Image
+                                    key={index}
+                                    src={
+                                        system.theme === 'dark'
+                                            ? icon.dark
+                                            : icon.light
+                                    }
+                                    onClick={icon.onClick}
+                                    className={classnames('w-full', 'h-full')}
+                                />
+                            </Button>
                         ))}
                     </View>
                 </View>
-            </View>
+            </Form>
         </PageContainer>
     )
 }
