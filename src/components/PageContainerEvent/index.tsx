@@ -17,7 +17,7 @@ import {
 } from '@tarojs/components'
 import classnames from 'classnames'
 import { Overlay } from '@nutui/nutui-react-taro'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
@@ -42,6 +42,12 @@ function PageContainerEvent() {
             onClick() {},
         })
     }
+
+    useEffect(() => {
+        if (!eventInfo.show) {
+            form.current?.clear()
+        }
+    }, [eventInfo])
 
     return (
         <PageContainer
