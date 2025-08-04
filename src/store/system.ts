@@ -27,11 +27,13 @@ export const useWindowsConfig = create(
             visible: false,
             closeLoading: false,
             type: null as WindowType | null,
+            props: {},
         },
         (set) => {
             return {
-                open(type: WindowType, cb?: () => void) {
+                open(type: WindowType, props = {}, cb?: () => void) {
                     set({
+                        props,
                         type,
                         visible: true,
                     })
@@ -46,6 +48,7 @@ export const useWindowsConfig = create(
                         type: null,
                         visible: false,
                         closeLoading: false,
+                        props: {},
                     })
                 },
             }

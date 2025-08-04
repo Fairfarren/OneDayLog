@@ -23,7 +23,9 @@ function TimeTitle(props?: { showDay?: boolean }) {
             return
         }
 
-        useWindowsConfig.getState().open(WindowType.选择日期)
+        useWindowsConfig.getState().open(WindowType.选择日期, {
+            showDay: props?.showDay,
+        })
     }
 
     return (
