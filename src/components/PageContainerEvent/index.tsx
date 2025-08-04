@@ -46,7 +46,6 @@ function PageContainerEvent() {
                 onSubmit={(e) => {
                     e.preventDefault()
                     console.log('Form submitted', e)
-                    // Handle form submission logic here
                 }}
                 className={classnames(
                     'w-screen',
@@ -59,6 +58,7 @@ function PageContainerEvent() {
             >
                 <View
                     className={classnames(
+                        '-translate-y-[20%]',
                         'w-[700px]',
                         'px-4',
                         'py-5',
