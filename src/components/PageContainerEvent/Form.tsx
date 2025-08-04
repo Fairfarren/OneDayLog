@@ -1,5 +1,5 @@
 import { useEventInfo } from '@/store/event'
-import { Input, View } from '@tarojs/components'
+import { Button, Input, View, Form } from '@tarojs/components'
 import classnames from 'classnames'
 
 const formObj = [
@@ -19,9 +19,7 @@ const formObj = [
     },
 ]
 
-function Form() {
-    const eventInfo = useEventInfo()
-
+function FormCom() {
     return (
         <>
             {formObj.map((item) => (
@@ -45,14 +43,9 @@ function Form() {
                             <View>tag</View>
                         ) : (
                             <Input
+                                name={item.key}
                                 className={classnames('w-full')}
                                 placeholder={item.placeholder}
-                                value={eventInfo[item.key]}
-                                onInput={(e) =>
-                                    eventInfo.update({
-                                        [item.key]: e.detail.value,
-                                    })
-                                }
                             />
                         )}
                     </View>
@@ -62,4 +55,4 @@ function Form() {
     )
 }
 
-export default Form
+export default FormCom
