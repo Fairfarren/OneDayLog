@@ -8,6 +8,7 @@ import FormCom, { type FormRef } from '@/components/PageContainerEvent/Form'
 import { useDoEventAdd } from '@/hooks/event'
 import { useEventInfo } from '@/store/event'
 import { useSystem } from '@/store/system'
+import { useTime } from '@/store/time'
 import { showLoading } from '@/utils'
 import { Overlay } from '@nutui/nutui-react-taro'
 import {
@@ -56,6 +57,7 @@ function PageContainerEvent() {
             title: e.detail.value.title,
             notes: e.detail.value.notes,
             tags: form.current?.getTags() || [],
+            createdAt: useTime.getState().choiceDay,
         })
         eventInfo.close()
         hideLoading()

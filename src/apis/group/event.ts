@@ -27,7 +27,7 @@ export function groupOptionsEventAdd() {
     return mutationOptions({
         mutationKey: [API_URL.EVENT_ADD],
         mutationFn: (
-            params: Pick<ClassEventInfo, 'title' | 'notes'> & {
+            params: Pick<ClassEventInfo, 'title' | 'notes' | 'createdAt'> & {
                 tags: string[]
             },
         ) => post(API_URL.EVENT_ADD, params),
