@@ -1,9 +1,12 @@
-import { groupOptionsEventList } from '@/apis/group/event'
+import API_URL from '@/apis/const'
+import { groupOptionsEventAdd, groupOptionsEventList } from '@/apis/group/event'
 import { useUserInfo } from '@/store/user'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export function useGetEventList(
-    props: Parameters<typeof groupOptionsEventList>[0],
+    props: Parameters<typeof groupOptionsEventList>[0] & {
+        isReload?: boolean
+    },
 ) {
     const userInfo = useUserInfo()
 
@@ -11,15 +14,29 @@ export function useGetEventList(
         groupOptionsEventList({
             startTime: props?.startTime || '',
             endTime: props?.endTime || '',
-            enabled: userInfo.isLogin(),
+            enabled: userInfo.isLogin() && !props.isReload,
         }),
     )
-
-    console.log(data)
 
     return {
         isLoading: isRefetching,
         list: data,
         reloadEventList: refetch,
+    }
+}
+
+export function useDoEventAdd() {
+    const { mutateAsync } = useMutation(groupOptionsEventAdd())
+    const queryClient = useQueryClient()
+
+    async function doEventAdd(props: Parameters<typeof mutateAsync>[0]) {
+        await mutateAsync(props)
+        return queryClient.invalidateQueries({
+            queryKey: [API_URL.EVENT_LIST],
+        })
+    }
+
+    return {
+        doEventAdd,
     }
 }

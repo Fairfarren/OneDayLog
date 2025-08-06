@@ -1,7 +1,7 @@
 import API_URL from '@/apis/const'
 import { post } from '@/apis/request'
 import { ClassEventInfo } from '@/store/event'
-import { queryOptions } from '@tanstack/react-query'
+import { mutationOptions, queryOptions } from '@tanstack/react-query'
 
 /**
  * 获取事件列表
@@ -17,5 +17,19 @@ export function groupOptionsEventList(props?: {
         queryKey: [API_URL.EVENT_LIST, props],
         queryFn: () => post(API_URL.EVENT_LIST, props),
         enabled: props?.enabled,
+    })
+}
+
+/**
+ * 添加事件
+ */
+export function groupOptionsEventAdd() {
+    return mutationOptions({
+        mutationKey: [API_URL.EVENT_ADD],
+        mutationFn: (
+            params: Pick<ClassEventInfo, 'title' | 'notes'> & {
+                tags: string[]
+            },
+        ) => post(API_URL.EVENT_ADD, params),
     })
 }

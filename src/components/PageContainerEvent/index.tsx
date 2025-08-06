@@ -5,25 +5,29 @@ import iconSubmit from '@/assets/icon/submit.svg'
 import TimeTitle from '@/components/calendar/timeTitle'
 import EventCard from '@/components/eventCard'
 import FormCom, { type FormRef } from '@/components/PageContainerEvent/Form'
+import { useDoEventAdd } from '@/hooks/event'
 import { useEventInfo } from '@/store/event'
 import { useSystem } from '@/store/system'
+import { showLoading } from '@/utils'
+import { Overlay } from '@nutui/nutui-react-taro'
 import {
-    Input,
     Button,
     Form,
     Image,
+    Input,
     PageContainer,
     View,
 } from '@tarojs/components'
+import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
-import { Overlay } from '@nutui/nutui-react-taro'
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
     const system = useSystem()
     const [visible, setVisible] = useState(false)
     const form = useRef<FormRef>(null)
+    const { doEventAdd } = useDoEventAdd()
 
     const iconList = [
         {
@@ -43,6 +47,20 @@ function PageContainerEvent() {
         })
     }
 
+    async function submit(e) {
+        e.preventDefault()
+        showLoading({
+            title: '创建中...',
+        })
+        await doEventAdd({
+            title: e.detail.value.title,
+            notes: e.detail.value.notes,
+            tags: form.current?.getTags() || [],
+        })
+        eventInfo.close()
+        hideLoading()
+    }
+
     useEffect(() => {
         if (!eventInfo.show) {
             form.current?.clear()
@@ -60,10 +78,7 @@ function PageContainerEvent() {
             }}
         >
             <Form
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    console.log('Form submitted', e)
-                }}
+                onSubmit={submit}
                 className={classnames(
                     'w-screen',
                     'h-screen',
