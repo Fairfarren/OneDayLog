@@ -1,13 +1,13 @@
 import QueryProvider from '@/components/globalConfig/queryProvider'
 import { useSystem } from '@/store/system'
-import { clearUserInfo, toSetCode } from '@/store/user'
+import { clearUserInfo, useIsReloading } from '@/store/user'
 import './app.scss'
 import {
     QueryCache,
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import { onThemeChange, useDidShow } from '@tarojs/taro'
+import { onThemeChange, useDidShow, cloud } from '@tarojs/taro'
 import { useEffect } from 'react'
 
 if (typeof globalThis.AbortController === 'undefined') {
@@ -22,9 +22,9 @@ if (typeof globalThis.AbortController === 'undefined') {
 const queryClient = new QueryClient({
     queryCache: new QueryCache({
         onError: (err) => {
+            console.error('Query Error:', err)
             if (err.code === 'RES_CODE.EXPIRE') {
                 clearUserInfo()
-                toSetCode()
             }
         },
     }),
@@ -44,6 +44,11 @@ function App(props) {
                 theme: e.theme,
             })
         })
+
+        cloud.init({
+            env: 'prod-0gdadaalcff6b8a7',
+        })
+        useIsReloading.getState().update(true)
     }, [])
 
     useDidShow((e) => {

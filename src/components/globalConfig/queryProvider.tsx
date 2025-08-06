@@ -1,30 +1,21 @@
 import { useTime } from '@/store/time'
-import { toSetCode, useStoToken } from '@/store/user'
 import { type ReactNode, useEffect } from 'react'
+import { useGetUserInfo } from '@/hooks/user'
+import { useIsReloading } from '@/store/user'
 
 function QueryProvider(props: { children: ReactNode }) {
-    useEffect(() => {
-        let unUseStoToken = () => {}
-        if (!useStoToken.persist.hasHydrated()) {
-            unUseStoToken = useStoToken.persist.onFinishHydration((state) => {
-                if (!state.value) {
-                    toSetCode()
-                }
-            })
-        } else {
-            if (!useStoToken.getState().value) {
-                toSetCode()
-            }
-        }
-
-        return () => {
-            unUseStoToken()
-        }
-    }, [])
+    const { reloadUserInfo } = useGetUserInfo({ isReload: true })
+    const isReload = useIsReloading()
 
     useEffect(() => {
         useTime.getState().reset()
     }, [])
+
+    useEffect(() => {
+        if (isReload.value) {
+            reloadUserInfo()
+        }
+    }, [isReload.value])
 
     return props.children
 }
