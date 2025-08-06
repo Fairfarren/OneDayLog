@@ -1,7 +1,7 @@
-import { queryOptions } from '@tanstack/react-query'
 import API_URL from '@/apis/const'
 import { get } from '@/apis/request'
 import { ClassUserInfo } from '@/store/user'
+import { queryOptions } from '@tanstack/react-query'
 
 /**
  * 获取用户信息

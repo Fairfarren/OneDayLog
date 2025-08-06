@@ -1,9 +1,10 @@
 import { Input, View } from '@tarojs/components'
 import classnames from 'classnames'
-import { useImperativeHandle, useState, forwardRef } from 'react'
+import { forwardRef, useImperativeHandle, useState } from 'react'
 
 export interface FormRef {
     addTag: (tag: string) => void
+    getTags: () => string[]
     clear: () => void
 }
 
@@ -14,7 +15,7 @@ const formObj = [
         placeholder: '要记录什么事情',
     },
     {
-        key: 'sub',
+        key: 'notes',
         label: '备注',
         placeholder: '还有什么需要备注的吗',
     },
@@ -42,6 +43,9 @@ function FormCom(
 
     useImperativeHandle(ref, () => ({
         addTag,
+        getTags() {
+            return tags
+        },
         clear() {
             setTags([])
         },
