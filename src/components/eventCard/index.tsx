@@ -3,7 +3,7 @@ import { ShareElement, Text, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { memo } from 'react'
 
-type Data = Pick<ClassEventInfo, 'tag' | 'title' | 'sub' | 'id'>
+type Data = Omit<ClassEventInfo, 'show'>
 
 function EventCard(props: {
     data: Data
@@ -39,19 +39,19 @@ function EventCard(props: {
                     props.showShadow && 'truncate',
                 )}
             >
-                {props.data.sub}
+                {props.data.notes}
             </ShareElement>
             <ShareElement
                 transform
                 mapkey={`EventCard-tag-${props.data.id}`}
                 className={classnames('mt-2', 'flex', 'flex-wrap', 'gap-2')}
             >
-                {props.data.tag.map((tag, i) => (
+                {props.data.eventTags.map((tag, i) => (
                     <View
                         className={classnames('badge', 'badge-neutral')}
                         key={i}
                     >
-                        # {tag}
+                        # {tag.tag.name}
                     </View>
                 ))}
             </ShareElement>

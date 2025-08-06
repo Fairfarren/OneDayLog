@@ -3,10 +3,12 @@ import { combine } from 'zustand/middleware'
 
 export class ClassEventInfo {
     show = false
-    id = ''
+    id = 0
+    unionid = ''
     title = ''
-    sub = ''
-    tag: string[] = []
+    notes = ''
+    createdAt = ''
+    eventTags = [] as EventTags[]
 }
 
 export const useEventInfo = create(
