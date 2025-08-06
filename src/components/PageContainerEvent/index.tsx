@@ -22,7 +22,7 @@ import {
 import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
@@ -66,12 +66,6 @@ function PageContainerEvent() {
         hideLoading()
     }
 
-    useEffect(() => {
-        if (!eventInfo.show) {
-            form.current?.clear()
-        }
-    }, [eventInfo])
-
     return (
         <PageContainer
             show={eventInfo.show}
@@ -110,11 +104,13 @@ function PageContainerEvent() {
                     <View className={classnames('mt-3', 'grid', 'gap-4')}>
                         {eventInfo.id ? (
                             <EventCard data={eventInfo} showShadow={false} />
-                        ) : (
+                        ) : eventInfo.show ? (
                             <FormCom
                                 ref={form}
                                 openTag={() => setVisible(true)}
                             />
+                        ) : (
+                            <></>
                         )}
                     </View>
 
