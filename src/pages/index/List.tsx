@@ -12,8 +12,8 @@ function List() {
     const time = useTime()
 
     const { list } = useGetEventList({
-        startTime: dayjs(time.choiceDay).format('yyyy-MM-DD 00:00:00'),
-        endTime: dayjs(time.choiceDay).format('yyyy-MM-DD 23:59:59'),
+        startTime: dayjs(time.choiceDay).format('YYYY-MM-DD 00:00:00'),
+        endTime: dayjs(time.choiceDay).format('YYYY-MM-DD 23:59:59'),
     })
 
     return (

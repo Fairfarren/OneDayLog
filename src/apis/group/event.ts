@@ -14,7 +14,7 @@ export function groupOptionsEventList(props?: {
     enabled?: boolean
 }) {
     return queryOptions<Omit<ClassEventInfo, 'show'>[]>({
-        queryKey: [API_URL.EVENT_LIST],
+        queryKey: [API_URL.EVENT_LIST, props],
         queryFn: () => post(API_URL.EVENT_LIST, props),
         enabled: props?.enabled,
     })
