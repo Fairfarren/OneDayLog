@@ -21,6 +21,7 @@ import {
 } from '@tarojs/components'
 import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
+import dayjs from 'dayjs'
 import { useEffect, useRef, useState } from 'react'
 
 function PageContainerEvent() {
@@ -57,7 +58,9 @@ function PageContainerEvent() {
             title: e.detail.value.title,
             notes: e.detail.value.notes,
             tags: form.current?.getTags() || [],
-            createdAt: useTime.getState().choiceDay,
+            createdAt: dayjs().format(
+                `${useTime.getState().choiceDay} HH:mm:ss`,
+            ),
         })
         eventInfo.close()
         hideLoading()
