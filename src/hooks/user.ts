@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
 import { groupOptionsUser } from '@/apis/group/user'
 import { useUserInfo } from '@/store/user'
+import { useQuery } from '@tanstack/react-query'
 
 export function useGetUserInfo(props?: { isReload?: boolean }) {
     const { data, refetch } = useQuery(

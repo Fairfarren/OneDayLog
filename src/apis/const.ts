@@ -12,6 +12,8 @@ export enum STORAGE_KEY {
 const API_URL = {
     /** 获取用户信息 */
     USER_INFO: '/wechat/getUserInfo',
+    /** 获取事件列表 */
+    EVENT_LIST: '/wechat/event/list',
 }
 
 export default API_URL

@@ -32,7 +32,7 @@ function api<T>(params: {
                 })
                 .then((res) => {
                     if (res.statusCode === RES_CODE.SUCCESS) {
-                        resolve(res.data as T)
+                        resolve(res.data.data as T)
                         return
                     } else if (res.statusCode === RES_CODE.EXPIRE) {
                         showToast({
