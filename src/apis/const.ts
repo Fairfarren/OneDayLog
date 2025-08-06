@@ -9,11 +9,9 @@ export enum STORAGE_KEY {
     TOKEN = 'token',
 }
 
-const VERSION = 'v1'
-
 const API_URL = {
-    /** 上传图片时获取 */
-    GET_TOKEN: `/api/${VERSION}/common/file/getToken`,
+    /** 获取用户信息 */
+    USER_INFO: '/wechat/getUserInfo',
 }
 
 export default API_URL
