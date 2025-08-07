@@ -9,8 +9,8 @@ import { mutationOptions, queryOptions } from '@tanstack/react-query'
  * @returns
  */
 export function groupOptionsEventList(props?: {
-    startTime: string
-    endTime: string
+    startTime?: string
+    endTime?: string
     enabled?: boolean
 }) {
     return queryOptions<Omit<ClassEventInfo, 'show'>[]>({

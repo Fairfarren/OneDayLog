@@ -8,7 +8,7 @@ import { useUserInfo } from '@/store/user'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export function useGetEventList(
-    props: Parameters<typeof groupOptionsEventList>[0] & {
+    props?: Parameters<typeof groupOptionsEventList>[0] & {
         isReload?: boolean
     },
 ) {
@@ -18,7 +18,7 @@ export function useGetEventList(
         groupOptionsEventList({
             startTime: props?.startTime || '',
             endTime: props?.endTime || '',
-            enabled: userInfo.isLogin() && !props.isReload,
+            enabled: userInfo.isLogin() && !props?.isReload,
         }),
     )
 
