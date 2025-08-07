@@ -9,7 +9,7 @@ import { useDoEventAdd } from '@/hooks/event'
 import { useEventInfo } from '@/store/event'
 import { useSystem } from '@/store/system'
 import { useTime } from '@/store/time'
-import { showLoading } from '@/utils'
+import { showLoading, showToast } from '@/utils'
 import { Overlay } from '@nutui/nutui-react-taro'
 import {
     Button,
@@ -51,6 +51,13 @@ function PageContainerEvent() {
 
     async function submit(e) {
         e.preventDefault()
+        if (!e.detail.value.title) {
+            showToast({
+                title: '请输入名称',
+                icon: 'error',
+            })
+            return
+        }
         showLoading({
             title: '创建中...',
         })
