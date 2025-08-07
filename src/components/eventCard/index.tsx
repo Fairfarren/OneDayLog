@@ -4,6 +4,7 @@ import { showLoading, showModal } from '@/utils'
 import { ShareElement, Text, View } from '@tarojs/components'
 import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
+import dayjs from 'dayjs'
 import { memo } from 'react'
 
 type Data = Omit<ClassEventInfo, 'show'>
@@ -64,6 +65,11 @@ function EventCard(props: {
             >
                 {props.data.notes}
             </ShareElement>
+            {props.showShadow && (
+                <View className={classnames('mt-1', 'text-sm')}>
+                    {dayjs(props.data.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                </View>
+            )}
             <ShareElement
                 transform
                 mapkey={`EventCard-tag-${props.data.id}`}

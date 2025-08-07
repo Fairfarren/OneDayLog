@@ -28,8 +28,11 @@ export const useEventInfo = create(
             update(data: Partial<ClassEventInfo>) {
                 set(data)
             },
-            reset() {
-                set(new ClassEventInfo())
+            reset(data?: Partial<ClassEventInfo>) {
+                set({
+                    ...new ClassEventInfo(),
+                    ...data,
+                })
             },
         }
     }),
