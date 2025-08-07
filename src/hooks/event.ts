@@ -1,5 +1,9 @@
 import API_URL from '@/apis/const'
-import { groupOptionsEventAdd, groupOptionsEventList } from '@/apis/group/event'
+import {
+    groupOptionsEventAdd,
+    groupOptionsEventDelete,
+    groupOptionsEventList,
+} from '@/apis/group/event'
 import { useUserInfo } from '@/store/user'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
@@ -38,5 +42,21 @@ export function useDoEventAdd() {
 
     return {
         doEventAdd,
+    }
+}
+
+export function useDoEventDelete() {
+    const { mutateAsync } = useMutation(groupOptionsEventDelete())
+    const queryClient = useQueryClient()
+
+    async function doEventDelete(props: Parameters<typeof mutateAsync>[0]) {
+        await mutateAsync(props)
+        return queryClient.invalidateQueries({
+            queryKey: [API_URL.EVENT_LIST],
+        })
+    }
+
+    return {
+        doEventDelete,
     }
 }

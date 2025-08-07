@@ -33,3 +33,16 @@ export function groupOptionsEventAdd() {
         ) => post(API_URL.EVENT_ADD, params),
     })
 }
+
+/**
+ * 删除事件
+ */
+export function groupOptionsEventDelete() {
+    return mutationOptions({
+        mutationKey: [API_URL.EVENT_DELETE],
+        mutationFn: (params: {
+            eventId: ClassEventInfo['id']
+            tagsId: ClassEventInfo['eventTags'][0]['tagId'][]
+        }) => post(API_URL.EVENT_DELETE, params),
+    })
+}

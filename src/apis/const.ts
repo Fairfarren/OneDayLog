@@ -16,6 +16,8 @@ const API_URL = {
     EVENT_LIST: '/wechat/event/list',
     /** 添加事件 */
     EVENT_ADD: '/wechat/event/add',
+    /** 删除事件 */
+    EVENT_DELETE: '/wechat/event/delete',
 }
 
 export default API_URL

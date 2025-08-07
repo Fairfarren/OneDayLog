@@ -1,5 +1,8 @@
-import { ClassEventInfo } from '@/store/event'
+import { useDoEventDelete } from '@/hooks/event'
+import { ClassEventInfo, useEventInfo } from '@/store/event'
+import { showLoading, showModal } from '@/utils'
 import { ShareElement, Text, View } from '@tarojs/components'
+import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
 import { memo } from 'react'
 
@@ -10,6 +13,25 @@ function EventCard(props: {
     onClick?: (_: Data) => void
     showShadow: boolean
 }) {
+    const { doEventDelete } = useDoEventDelete()
+
+    function onLongPress() {
+        showModal({
+            title: '提示',
+            content: '是否删除？',
+        }).then(async () => {
+            showLoading({
+                title: '删除中...',
+            })
+            await doEventDelete({
+                eventId: props.data.id,
+                tagsId: props.data.eventTags.map((eventTag) => eventTag.tagId),
+            })
+            hideLoading()
+            useEventInfo.getState().reset()
+        })
+    }
+
     return (
         <View
             className={classnames(
@@ -20,6 +42,7 @@ function EventCard(props: {
                 e.stopPropagation()
                 props.onClick?.(props.data)
             }}
+            onLongPress={onLongPress}
         >
             <ShareElement
                 className={classnames('text-xl', 'font-bold', 'text-primary')}
