@@ -17,6 +17,7 @@ export function groupOptionsEventList(props?: {
         queryKey: [API_URL.EVENT_LIST, props],
         queryFn: () => post(API_URL.EVENT_LIST, props),
         enabled: props?.enabled,
+        staleTime: Infinity,
     })
 }
 

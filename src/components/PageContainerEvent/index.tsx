@@ -23,6 +23,7 @@ import { hideLoading } from '@tarojs/taro'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
 import { useRef, useState } from 'react'
+import List from './List'
 
 function PageContainerEvent() {
     const eventInfo = useEventInfo()
@@ -36,7 +37,10 @@ function PageContainerEvent() {
             dark: iconCancel,
             light: iconCancelLight,
             onClick() {
-                eventInfo.close()
+                eventInfo.reset({
+                    title: eventInfo.title,
+                    show: true,
+                })
             },
         },
     ]
@@ -83,82 +87,95 @@ function PageContainerEvent() {
                 eventInfo.reset()
             }}
         >
-            <Form
-                onSubmit={submit}
-                className={classnames(
-                    'w-screen',
-                    'h-screen',
-                    'flex',
-                    'items-center',
-                    'justify-center',
-                    'bg-base-200',
-                )}
-            >
-                <View
+            {!eventInfo.id && eventInfo.title ? (
+                <List name={eventInfo.title} />
+            ) : (
+                <Form
+                    onSubmit={submit}
                     className={classnames(
-                        '-translate-y-[20%]',
-                        'w-[700px]',
-                        'px-4',
-                        'py-5',
-                        'rounded-2xl',
-                        'bg-base-100',
-                        'shadow-2xl',
-                        'box-border',
-                        'relative',
+                        'w-screen',
+                        'h-screen',
+                        'flex',
+                        'items-center',
+                        'justify-center',
+                        'bg-base-200',
                     )}
                 >
-                    <TimeTitle showDay />
-                    <View className={classnames('mt-3', 'grid', 'gap-4')}>
-                        {eventInfo.id ? (
-                            <EventCard data={eventInfo} showShadow={false} />
-                        ) : eventInfo.show ? (
-                            <FormCom
-                                ref={form}
-                                openTag={() => setVisible(true)}
-                            />
-                        ) : (
-                            <></>
-                        )}
-                    </View>
-
                     <View
                         className={classnames(
-                            'absolute',
-                            'w-full',
-                            '-bottom-20',
-                            'left-0',
-                            'flex',
-                            'items-center',
-                            'justify-around',
+                            '-translate-y-[20%]',
+                            'w-[700px]',
+                            'px-4',
+                            'py-5',
+                            'rounded-2xl',
+                            'bg-base-100',
+                            'shadow-2xl',
+                            'box-border',
+                            'relative',
                         )}
                     >
-                        {iconList.map((icon, index) => (
-                            <Button
-                                className={classnames(
-                                    'default-button',
-                                    'w-12',
-                                    'h-12',
-                                    'rounded-full',
-                                )}
-                                key={index}
-                                formType={index === 1 ? 'submit' : undefined}
-                                onClick={icon.onClick}
-                            >
-                                <Image
+                        <TimeTitle showDay />
+                        <View className={classnames('mt-3', 'grid', 'gap-4')}>
+                            {eventInfo.id ? (
+                                <EventCard
+                                    data={eventInfo}
+                                    showShadow={false}
+                                />
+                            ) : eventInfo.show ? (
+                                <FormCom
+                                    ref={form}
+                                    openTag={() => setVisible(true)}
+                                />
+                            ) : (
+                                <></>
+                            )}
+                        </View>
+
+                        <View
+                            className={classnames(
+                                'absolute',
+                                'w-full',
+                                '-bottom-20',
+                                'left-0',
+                                'flex',
+                                'items-center',
+                                'justify-around',
+                            )}
+                        >
+                            {iconList.map((icon, index) => (
+                                <Button
+                                    className={classnames(
+                                        'default-button',
+                                        'w-12',
+                                        'h-12',
+                                        'rounded-full',
+                                    )}
                                     key={index}
-                                    src={
-                                        system.theme === 'dark'
-                                            ? icon.dark
-                                            : icon.light
+                                    formType={
+                                        index === 1 ? 'submit' : undefined
                                     }
                                     onClick={icon.onClick}
-                                    className={classnames('w-full', 'h-full')}
-                                />
-                            </Button>
-                        ))}
+                                >
+                                    <Image
+                                        key={index}
+                                        src={
+                                            system.theme === 'dark'
+                                                ? icon.dark
+                                                : icon.light
+                                        }
+                                        onClick={icon.onClick}
+                                        className={classnames(
+                                            'w-full',
+                                            'h-full',
+                                        )}
+                                    />
+                                </Button>
+                            ))}
+                        </View>
                     </View>
-                </View>
-            </Form>
+                </Form>
+            )}
+
             <Overlay visible={visible}>
                 <View
                     className={classnames(
