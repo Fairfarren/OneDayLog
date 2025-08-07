@@ -8,10 +8,10 @@ interface EventList {
 }
 
 interface EventTags {
-    eventId: 1
-    tagId: 1
+    eventId: number
+    tagId: number
     tag: {
-        id: 1
-        name: '工作'
+        id: number
+        name: string
     }
 }
