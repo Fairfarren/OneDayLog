@@ -7,8 +7,12 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-import { onThemeChange, useDidShow, cloud } from '@tarojs/taro'
+import { cloud, onThemeChange, useDidShow } from '@tarojs/taro'
+import dayjs from 'dayjs'
 import { useEffect } from 'react'
+import 'dayjs/locale/zh-cn'
+
+dayjs.locale('zh-cn')
 
 if (typeof globalThis.AbortController === 'undefined') {
     // 简单的空实现，避免报错

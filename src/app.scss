@@ -68,7 +68,7 @@ page {
         'Segoe UI Emoji',
         Segoe UI Symbol,
         'Noto Color Emoji';
-    @extend .bg;
+    @apply bg-base-200;
 }
 
 .container {
@@ -80,7 +80,7 @@ page {
     //    rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     //    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     //    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    @apply px-2 py-3 bg-base-100 rounded-lg mt-3 shadow-xl;
+    @apply p-4 bg-base-100 rounded-lg mt-3 shadow-xl;
 }
 
 .occupy-bottom {
