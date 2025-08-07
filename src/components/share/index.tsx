@@ -8,9 +8,9 @@ import classnames from 'classnames'
 import { memo, useEffect, useState } from 'react'
 
 export const shareOption = {
-    title: '我在用小熊配货宝，自动打印配货单，好用！点击领积分！',
+    title: '上次做是多久来着。。。',
     imageUrl:
-        'https://remember-quick.oss-cn-chengdu.aliyuncs.com/bear/share.png',
+        'https://remember-quick.oss-cn-chengdu.aliyuncs.com/bear/heihei.jpg',
     path: PATH_URL.INDEX,
 }
 /**
