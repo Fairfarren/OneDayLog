@@ -39,7 +39,7 @@ function PageContainerEvent() {
             onClick() {
                 eventInfo.reset({
                     title: eventInfo.title,
-                    show: true,
+                    show: !!eventInfo.title,
                 })
             },
         },
