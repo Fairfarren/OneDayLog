@@ -20,6 +20,18 @@ function List(props: { name: ClassEventInfo['title'] }) {
         return arr
     }, [props.name, list])
 
+    function afterLongPress() {
+        // 因为请求之后这里拿到的getList还没有被刷新，所以length用1
+        if (getList.length > 1) {
+            useEventInfo.getState().reset({
+                title: props.name,
+                show: true,
+            })
+        } else {
+            useEventInfo.getState().reset()
+        }
+    }
+
     return (
         <View className={classnames('bg-base-200')}>
             <DiyHeader>
@@ -51,6 +63,7 @@ function List(props: { name: ClassEventInfo['title'] }) {
             >
                 {getList.map((item, index) => (
                     <EventCard
+                        afterLongPress={afterLongPress}
                         onClick={() => {
                             useEventInfo.getState().open(item)
                         }}

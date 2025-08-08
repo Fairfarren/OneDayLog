@@ -13,6 +13,7 @@ function EventCard(props: {
     data: Data
     onClick?: (_: Data) => void
     showShadow: boolean
+    afterLongPress?: () => void
 }) {
     const { doEventDelete } = useDoEventDelete()
 
@@ -29,7 +30,11 @@ function EventCard(props: {
                 tagsId: props.data.eventTags.map((eventTag) => eventTag.tagId),
             })
             hideLoading()
-            useEventInfo.getState().reset()
+            if (props.afterLongPress) {
+                props.afterLongPress()
+            } else {
+                useEventInfo.getState().reset()
+            }
         })
     }
 
