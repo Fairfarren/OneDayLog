@@ -1,4 +1,4 @@
-import { Input, View } from '@tarojs/components'
+import { Input, Textarea, View } from '@tarojs/components'
 import classnames from 'classnames'
 import { forwardRef, useImperativeHandle, useState } from 'react'
 
@@ -8,23 +8,6 @@ export interface FormRef {
     clear: () => void
 }
 
-const formObj = [
-    {
-        key: 'title',
-        label: '名称',
-        placeholder: '要记录什么事情',
-    },
-    {
-        key: 'notes',
-        label: '备注',
-        placeholder: '还有什么需要备注的吗',
-    },
-    {
-        key: 'tag',
-        label: '标签',
-    },
-]
-
 function FormCom(
     props: {
         openTag: () => void
@@ -32,6 +15,54 @@ function FormCom(
     ref,
 ) {
     const [tags, setTags] = useState<string[]>([])
+
+    const formObj = [
+        {
+            key: 'title',
+            label: '名称',
+            com: <Input name="title" placeholder="要记录什么事情" />,
+        },
+        {
+            key: 'notes',
+            label: '备注',
+            com: <Textarea name="notes" placeholder="还有什么需要备注的吗" />,
+        },
+        {
+            key: 'tag',
+            label: '标签',
+            com: (
+                <>
+                    <View
+                        className={classnames(
+                            'flex',
+                            'items-center',
+                            'gap-2',
+                            'flex-wrap',
+                        )}
+                    >
+                        {tags.map((tag, index) => (
+                            <View
+                                key={index}
+                                className={classnames('badge', 'badge-neutral')}
+                            >
+                                # {tag}
+                            </View>
+                        ))}
+                        <View
+                            className={classnames(
+                                'kbd',
+                                'kbd-md',
+                                'bg-base-100',
+                            )}
+                            onClick={props.openTag}
+                        >
+                            +
+                        </View>
+                    </View>
+                </>
+            ),
+        },
+    ]
 
     function addTag(tag: string) {
         setTags((e) => {
@@ -61,7 +92,7 @@ function FormCom(
                         'flex',
                         'gap-2',
                         'text-lg',
-                        item.key === 'tag' ? 'items-start' : 'items-center',
+                        'items-start',
                     )}
                 >
                     <View
@@ -69,45 +100,10 @@ function FormCom(
                     >
                         {item.label}
                     </View>
-                    <View className={classnames('flex-shrink', 'w-full')}>
-                        {item.key === 'tag' ? (
-                            <View
-                                className={classnames(
-                                    'flex',
-                                    'items-center',
-                                    'gap-2',
-                                    'flex-wrap',
-                                )}
-                            >
-                                {tags.map((tag, index) => (
-                                    <View
-                                        key={index}
-                                        className={classnames(
-                                            'badge',
-                                            'badge-neutral',
-                                        )}
-                                    >
-                                        # {tag}
-                                    </View>
-                                ))}
-                                <View
-                                    className={classnames(
-                                        'kbd',
-                                        'kbd-md',
-                                        'bg-base-100',
-                                    )}
-                                    onClick={props.openTag}
-                                >
-                                    +
-                                </View>
-                            </View>
-                        ) : (
-                            <Input
-                                name={item.key}
-                                className={classnames('w-full')}
-                                placeholder={item.placeholder}
-                            />
-                        )}
+                    <View
+                        className={classnames('flex-shrink', 'w-full', 'py-1')}
+                    >
+                        {item.com}
                     </View>
                 </View>
             ))}
