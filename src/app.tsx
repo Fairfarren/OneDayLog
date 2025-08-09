@@ -11,8 +11,10 @@ import { cloud, onThemeChange, useDidShow } from '@tarojs/taro'
 import dayjs from 'dayjs'
 import { useEffect } from 'react'
 import 'dayjs/locale/zh-cn'
+import utc from 'dayjs/plugin/utc'
 
 dayjs.locale('zh-cn')
+dayjs.extend(utc)
 
 if (typeof globalThis.AbortController === 'undefined') {
     // 简单的空实现，避免报错

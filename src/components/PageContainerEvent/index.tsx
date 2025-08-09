@@ -65,13 +65,16 @@ function PageContainerEvent() {
         showLoading({
             title: '创建中...',
         })
+
+        const now = dayjs(
+            dayjs().format(`${useTime.getState().choiceDay} HH:mm:ss`),
+        ).utc()
+
         await doEventAdd({
             title: e.detail.value.title,
             notes: e.detail.value.notes,
             tags: form.current?.getTags() || [],
-            createdAt: dayjs().format(
-                `${useTime.getState().choiceDay} HH:mm:ss`,
-            ),
+            createdAt: now.toISOString(),
         })
         eventInfo.close()
         hideLoading()
