@@ -43,7 +43,7 @@ function TopTime() {
                     <View className="countdown">
                         <Text
                             style={{
-                                '--value': time.month() + 1,
+                                '--value': time.date(),
                             }}
                         ></Text>
                     </View>
